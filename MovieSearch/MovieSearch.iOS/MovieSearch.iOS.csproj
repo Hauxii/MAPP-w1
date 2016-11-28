@@ -138,7 +138,6 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
-    <InterfaceDefinition Include="Main.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -149,10 +148,6 @@
     <Compile Include="MyClass.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="ViewController.cs" />
-    <Compile Include="ViewController.designer.cs">
-      <DependentUpon>ViewController.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
