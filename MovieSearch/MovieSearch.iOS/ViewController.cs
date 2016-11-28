@@ -8,7 +8,7 @@ using DM.MovieApi.ApiResponse;
 
 namespace MovieSearch.iOS
 {
-	public partial class ViewController : UIViewController
+	public class ViewController : UIViewController
 	{
         private const int HorizontalMargin = 20;
 
@@ -72,12 +72,6 @@ namespace MovieSearch.iOS
             this.View.AddSubview(searchResult);
 
 
-		}
-
-		public override void DidReceiveMemoryWarning ()
-		{
-			base.DidReceiveMemoryWarning ();
-			// Release any cached data, images, etc that aren't in use.
 		}
 	}
 }

@@ -17,9 +17,15 @@ namespace MovieSearch.iOS
 
 		public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
 		{
-			// Override point for customization after application launch.
-			// If not required for your application you can safely delete this method
-			return true;
+            // Override point for customization after application launch.
+            // If not required for your application you can safely delete this method
+            this.Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+            var controller = new MyClass();
+            this.Window.RootViewController = controller;
+
+            this.Window.MakeKeyAndVisible();
+            return true;
 		}
 
 		public override void OnResignActivation (UIApplication application)
