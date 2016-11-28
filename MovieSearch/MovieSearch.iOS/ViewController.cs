@@ -3,6 +3,8 @@ using DM.MovieApi;
 
 using UIKit;
 using CoreGraphics;
+using DM.MovieApi.MovieDb.Movies;
+using DM.MovieApi.ApiResponse;
 
 namespace MovieSearch.iOS
 {
@@ -24,7 +26,7 @@ namespace MovieSearch.iOS
 		{
 			base.ViewDidLoad ();
             MovieDbFactory.RegisterSettings(new DBSettings());
-
+            var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
 
             this.View.BackgroundColor = UIColor.White;
 
@@ -37,7 +39,7 @@ namespace MovieSearch.iOS
             };
             this._yCoord += StepY;
 
-            var nameField = new UITextField()
+            var movieField = new UITextField()
             {
                 Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50),
                 BorderStyle = UITextBorderStyle.RoundedRect,
@@ -45,27 +47,28 @@ namespace MovieSearch.iOS
             };
             this._yCoord += StepY;
 
-            var greetingButton = UIButton.FromType(UIButtonType.RoundedRect);
-            greetingButton.Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50);
-            greetingButton.SetTitle("Get movie", UIControlState.Normal);
+            var searchButton = UIButton.FromType(UIButtonType.RoundedRect);
+            searchButton.Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50);
+            searchButton.SetTitle("Get movie", UIControlState.Normal);
             this._yCoord += StepY;
 
-            var greetingLabel = new UILabel()
+            var searchResult = new UILabel()
             {
                 Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width, 50)
             };
             this._yCoord += StepY;
 
-            greetingButton.TouchUpInside += (sender, args) =>
+            searchButton.TouchUpInside += async (sender, args) =>
             {
-                nameField.ResignFirstResponder();
-                //greetingLabel.Text = "Hello " + nameField.Text;
+                movieField.ResignFirstResponder();
+                ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(movieField.Text);
+                //searchResult.Text = "Hello " + nameField.Text;
             };
 
             this.View.AddSubview(prompt);
-            this.View.AddSubview(nameField);
-            this.View.AddSubview(greetingButton);
-            this.View.AddSubview(greetingLabel);
+            this.View.AddSubview(movieField);
+            this.View.AddSubview(searchButton);
+            this.View.AddSubview(searchResult);
 
 
 		}
