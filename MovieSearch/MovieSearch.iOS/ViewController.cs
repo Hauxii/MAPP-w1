@@ -62,7 +62,8 @@ namespace MovieSearch.iOS
             {
                 movieField.ResignFirstResponder();
                 ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(movieField.Text);
-                //searchResult.Text = "Hello " + nameField.Text;
+
+                searchResult.Text = response.Results[0].Title;
             };
 
             this.View.AddSubview(prompt);
