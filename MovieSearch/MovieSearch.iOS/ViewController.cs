@@ -1,4 +1,5 @@
 ﻿using System;
+using DM.MovieApi;
 
 using UIKit;
 
@@ -21,6 +22,7 @@ namespace MovieSearch.iOS
 				var title = string.Format ("{0} clicks!", count++);
 				Button.SetTitle (title, UIControlState.Normal);
 			};
+            MovieDbFactory.RegisterSettings(new DBSettings());
 		}
 
 		public override void DidReceiveMemoryWarning ()
