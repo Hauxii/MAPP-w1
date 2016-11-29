@@ -48,10 +48,6 @@ namespace MovieSearch.iOS
             var searchButton = CreateButton("Get movie");
             this._yCoord += StepY;
 
-            var searchResult = new UILabel()
-            {
-                Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width, 50)
-            };
             this._yCoord += StepY;
 
             searchButton.TouchUpInside += async (sender, args) =>
@@ -60,8 +56,7 @@ namespace MovieSearch.iOS
                 ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(movieField.Text);
                 var loading = new UIActivityIndicatorView();
                 this.View.AddSubview(loading);
-                searchResult.Text = response.Results[0].Title;
-                //add to list?
+
                 _movies.MovieList.Clear();
 
                 foreach (var r in response.Results)
@@ -75,9 +70,7 @@ namespace MovieSearch.iOS
             this.View.AddSubview(prompt);
             this.View.AddSubview(movieField);
             this.View.AddSubview(searchButton);
-            this.View.AddSubview(searchResult);
-
-
+            
         }
 
         private UIButton CreateButton(string title)
