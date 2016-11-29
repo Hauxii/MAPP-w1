@@ -12,14 +12,10 @@ namespace MovieSearch
 
         public Movies()
         {
-            this._list = new List<string>
-            {
-                "item1",
-                "item2"
-            };
+            this._list = new List<string>();
         }
 
         //Getter
-        public List<string> Movies => this._list;
+        public List<string> MovieList => this._list;
     }
 }

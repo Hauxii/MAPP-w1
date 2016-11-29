@@ -63,9 +63,10 @@ namespace MovieSearch.iOS
 
                 searchResult.Text = response.Results[0].Title;
                 //add to list?
+                _movies.MovieList.Clear();
                 foreach (var r in response.Results)
                 {
-                    _movies.Movies.Add(r.Title);
+                    _movies.MovieList.Add(r.Title);
                 }
                 //TODO: ADD LOADING BAR
             };
@@ -73,12 +74,13 @@ namespace MovieSearch.iOS
             navButton.TouchUpInside += (sender, args) =>
             {
                 movieField.ResignFirstResponder();
-                this.NavigationController.PushViewController(new MovieListController(this._movies.Movies), true);
+                this.NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
             };
 
             this.View.AddSubview(prompt);
             this.View.AddSubview(movieField);
             this.View.AddSubview(searchButton);
+            this.View.AddSubview(navButton);
             this.View.AddSubview(searchResult);
 
 
