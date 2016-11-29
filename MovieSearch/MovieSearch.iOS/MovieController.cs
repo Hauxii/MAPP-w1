@@ -60,7 +60,7 @@ namespace MovieSearch.iOS
             {
                 movieField.ResignFirstResponder();
                 ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(movieField.Text);
-
+                this.View.Add(new UIActivityIndicatorView());
                 searchResult.Text = response.Results[0].Title;
                 //add to list?
                 _movies.MovieList.Clear();
@@ -71,17 +71,20 @@ namespace MovieSearch.iOS
                 //TODO: ADD LOADING BAR
             };
 
-            navButton.TouchUpInside += (sender, args) =>
+            navButton.TouchUpInside += async (sender, args) =>
             {
                 movieField.ResignFirstResponder();
+                ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(movieField.Text);
+                var loading = new UIActivityIndicatorView();
+                this.View.AddSubview(loading);
                 this.NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
             };
 
             this.View.AddSubview(prompt);
             this.View.AddSubview(movieField);
-            this.View.AddSubview(searchButton);
+            //this.View.AddSubview(searchButton);
             this.View.AddSubview(navButton);
-            this.View.AddSubview(searchResult);
+            //this.View.AddSubview(searchResult);
 
 
         }
