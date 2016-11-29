@@ -7,6 +7,7 @@ using DM.MovieApi.MovieDb.Movies;
 using DM.MovieApi.ApiResponse;
 
 namespace MovieSearch.iOS
+
 {
 	public class MovieController : UIViewController
 	{
@@ -68,7 +69,7 @@ namespace MovieSearch.iOS
 				}
 
 				this.NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
-
+                loading.StopAnimating();
 				searchButton.Enabled = true;
 				loading.StopAnimating();
 			};
