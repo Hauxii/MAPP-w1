@@ -52,7 +52,8 @@ namespace MovieSearch.iOS
 
             searchButton.TouchUpInside += async (sender, args) =>
             {
-                movieField.ResignFirstResponder();
+				searchButton.Enabled = false;
+				movieField.ResignFirstResponder();
                 ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(movieField.Text);
 
                 //add to list?
@@ -65,6 +66,7 @@ namespace MovieSearch.iOS
 
 				movieField.ResignFirstResponder();
 				this.NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
+				searchButton.Enabled = true;
                 //TODO: ADD LOADING BAR
             };
 
