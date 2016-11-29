@@ -55,8 +55,9 @@ namespace MovieSearch.iOS
 				searchButton.Enabled = false;
 				movieField.ResignFirstResponder();
                 ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(movieField.Text);
+                var loading = new UIActivityIndicatorView();
+                this.View.AddSubview(loading);
 
-                //add to list?
                 _movies.MovieList.Clear();
 
                 foreach (var r in response.Results)
@@ -64,10 +65,9 @@ namespace MovieSearch.iOS
                     _movies.MovieList.Add(r.Title);
                 }
 
-				movieField.ResignFirstResponder();
 				this.NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
+
 				searchButton.Enabled = true;
-                //TODO: ADD LOADING BAR
             };
 
             this.View.AddSubview(prompt);
