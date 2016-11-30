@@ -8,6 +8,7 @@
             this.Title = title;
         }
         public string Title { get; set; }
+		public string Year { get; set; }
         public string Genre { get; set; }
         //TODO: MOAR INFO
     }
