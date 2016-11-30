@@ -16,14 +16,9 @@ namespace MovieSearch.Model
             this._list = new List<Movie>();
         }
 
-        public void AddMovie(string title)
+        public void AddMovie(Movie mov)
         {
-            var movie = new Movie(title /*TODO: AND MOAR*/)
-            {
-                Title = title,
-                //TODO: ADD MOAR
-            };
-            this._list.Add(movie);
+            this._list.Add(mov);
         }
 
         //Getter
