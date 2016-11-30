@@ -77,6 +77,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MovieSearch\MovieSearch.csproj">
       <Name>MovieSearch</Name>
+      <Project>{290AD6E6-AD5F-44EF-8707-89142E06B64A}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Controllers\MovieListSource.cs" />
     <Compile Include="Views\CustomCell.cs" />
+    <Compile Include="Controllers\MovieDetailsController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
