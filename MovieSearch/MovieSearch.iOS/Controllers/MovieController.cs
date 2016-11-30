@@ -7,6 +7,8 @@ using DM.MovieApi.MovieDb.Movies;
 using DM.MovieApi.ApiResponse;
 using MovieSearch.Model;
 using System.Collections.Generic;
+using System.Threading;
+using MovieSearch.MovieDownload;
 
 namespace MovieSearch.iOS.Controllers
 
@@ -54,6 +56,8 @@ namespace MovieSearch.iOS.Controllers
 			searchButton.TouchUpInside += async (sender, args) =>
 			{
 				searchButton.Enabled = false;
+			    ImageDownloader getImage = new ImageDownloader(new StorageClient());
+                
 
 				//loading
 				var loading = CreateLoadingSpinner();
@@ -70,6 +74,8 @@ namespace MovieSearch.iOS.Controllers
                 foreach (var r in movieInfoList)
 				{
                     ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(r.Id);
+
+                    await getImage.DownloadImage(r.PosterPath, "", CancellationToken.None);
 
                     var movie = new Model.Movie()
                     {

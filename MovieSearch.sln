@@ -9,7 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieSearch.iOS", "MovieSea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieSearch", "MovieSearch\MovieSearch\MovieSearch.csproj", "{290AD6E6-AD5F-44EF-8707-89142E06B64A}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MovieDownload", "MovieDownload\MovieDownload.shproj", "{8E0A00B1-D0E6-48F6-AA04-26171F002437}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		MovieDownload\MovieDownload.projitems*{27dc6775-9745-4d0c-b5dd-492ad81bd517}*SharedItemsImports = 4
+		MovieDownload\MovieDownload.projitems*{8e0a00b1-d0e6-48f6-aa04-26171f002437}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
