@@ -5,6 +5,7 @@ using MovieSearch.iOS.Views;
 using UIKit;
 using MovieSearch.Model;
 
+
 namespace MovieSearch.iOS.Controllers
 {
     public class MovieListSource : UITableViewSource
@@ -30,7 +31,9 @@ namespace MovieSearch.iOS.Controllers
             }
 
             int row = indexPath.Row;
+
 			string titleyear = this._movieList[row].Title + " (" + this._movieList[row].Year + ")";
+
 			cell.UpdateCell(titleyear, this._movieList[row].Year /*TODO: CHANGE*/, this._movieList[row].Title/*TODO: CHANGE*/);
             return cell;
         }
@@ -42,7 +45,6 @@ namespace MovieSearch.iOS.Controllers
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
-            //base.RowSelected(tableView, indexPath);
             tableView.DeselectRow(indexPath, true);
             this._onSelectedMovie(indexPath.Row);
         }

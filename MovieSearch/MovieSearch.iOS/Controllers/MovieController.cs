@@ -6,6 +6,7 @@ using CoreGraphics;
 using DM.MovieApi.MovieDb.Movies;
 using DM.MovieApi.ApiResponse;
 using MovieSearch.Model;
+using System.Collections.Generic;
 
 namespace MovieSearch.iOS.Controllers
 
@@ -72,25 +73,20 @@ namespace MovieSearch.iOS.Controllers
                     {
                         Title = r.Title,
                         Year = r.ReleaseDate.Year.ToString(),
-                        Genre = r.Genres.ToString(),
-                        //Overview = r.Overview
-
-                        //TODO: MOAR INFO
                         Overview = r.Overview,
                         Poster = r.PosterPath
                         //TODO: Cast
                     };
 
+					foreach (var g in r.Genres)
+					{
+						movie.Genre.Add(g.Name);
+					}
+
                     for (int i = 0; i < resp.Item.CastMembers.Count || i < 3; i++)
                     {
                         movie.Cast.Add(resp.Item.CastMembers[i].Name);
                     }
-
-					String[] genres = null;
-
-					foreach (var g in response.Results)
-					{
-					}
                     
 					_movies.MovieList.Add(movie);
 				}
