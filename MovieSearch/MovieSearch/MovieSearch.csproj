@@ -32,8 +32,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DBSettings.cs" />
+    <Compile Include="Model\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Movies.cs" />
+    <Compile Include="Model\Movies.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="DM.MovieApi, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
