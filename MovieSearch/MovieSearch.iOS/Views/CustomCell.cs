@@ -41,7 +41,7 @@ namespace MovieSearch.iOS.Views
 
         public void UpdateCell(string title, string year, string image)
         {
-            this._imageView.Image = UIImage.FromFile(string.Empty); //TODO: GET IMAGE FROM API
+            this._imageView.Image = UIImage.FromFile(image); //TODO: GET IMAGE FROM API
             this._titleLabel.Text = title;
             this._yearLabel.Text = year;
 
