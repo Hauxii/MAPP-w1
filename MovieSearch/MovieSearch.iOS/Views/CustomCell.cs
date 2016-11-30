@@ -18,17 +18,14 @@ namespace MovieSearch.iOS.Views
 
             this._titleLabel = new UILabel()
             {
-                Font = UIFont.FromName("Marion-Italic", 22f),
-                TextColor = UIColor.FromRGB(255, 0, 0),
-                BackgroundColor = UIColor.Clear //MAYBE SKIP?
+                Font = UIFont.FromName("Marion", 22f),
+                TextColor = UIColor.FromRGB(128, 0, 0),
             };
 
             this._yearLabel = new UILabel()
             {
-                Font = UIFont.FromName("Marion-Italic", 22f), //TODO: ERLA FIX FONT PLS
-                TextColor = UIColor.Green, //TODO: ERLA FIX THIS COLOR FIASKO
-                TextAlignment = UITextAlignment.Center,
-                BackgroundColor = UIColor.Clear
+                Font = UIFont.FromName("Marion-Italic", 15f), //TODO: ERLA FIX FONT PLS
+                TextColor = UIColor.FromRGB(128, 0, 0), //TODO: ERLA FIX THIS COLOR FIASKO
             };
             
             this.ContentView.AddSubviews(new UIView[] {this._imageView, this._titleLabel, this._yearLabel});
@@ -39,7 +36,7 @@ namespace MovieSearch.iOS.Views
             base.LayoutSubviews();
             this._imageView.Frame = new CGRect(this.ContentView.Bounds.Width - 60, 5, 33, 33);
             this._titleLabel.Frame = new CGRect(5, 5, this.ContentView.Bounds.Width - 60, 25);
-            this._yearLabel.Frame = new CGRect(100, 25, 100, 20);
+            this._yearLabel.Frame = new CGRect(5, 25, 100, 20);
         }
 
         public void UpdateCell(string title, string year, string image)
