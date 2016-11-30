@@ -36,7 +36,7 @@ namespace MovieSearch.iOS.Views
             base.LayoutSubviews();
             this._imageView.Frame = new CGRect(this.ContentView.Bounds.Width - 60, 5, 33, 33);
             this._titleLabel.Frame = new CGRect(5, 5, this.ContentView.Bounds.Width - 60, 25);
-            this._yearLabel.Frame = new CGRect(5, 25, this.ContentView.Bounds.Width - 60, 20);
+            this._yearLabel.Frame = new CGRect(5, 27, this.ContentView.Bounds.Width - 60, 20);
         }
 
         public void UpdateCell(string title, string year, string image)
@@ -45,7 +45,5 @@ namespace MovieSearch.iOS.Views
             this._titleLabel.Text = title;
             this._yearLabel.Text = year;
         }
-
-
     }
 }
