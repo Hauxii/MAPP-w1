@@ -76,7 +76,7 @@ namespace MovieSearch.iOS.Controllers
                     ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(r.Id);
 
 				    var localFilePath = getImage.LocalPathForFilename(r.PosterPath);
-                    await getImage.DownloadImage(r.PosterPath, localFilePath, CancellationToken.None);
+                    getImage.DownloadImage(r.PosterPath, localFilePath, CancellationToken.None);
 
                     var movie = new Model.Movie()
                     {
