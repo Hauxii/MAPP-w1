@@ -69,24 +69,27 @@ namespace MovieSearch.iOS.Controllers
 				{
                     ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(r.Id);
 
+					List<string> cast = null;
+
+					for (int i = 0; i < resp.Item.CastMembers.Count || i < 3; i++)
+					{
+						cast.Add(resp.Item.CastMembers[i].Name);
+					}
+
                     var movie = new Model.Movie()
                     {
                         Title = r.Title,
                         Year = r.ReleaseDate.Year.ToString(),
                         Overview = r.Overview,
-                        Poster = r.PosterPath
+                        Poster = r.PosterPath,
+						Cast = cast
                         //TODO: Cast
                     };
 
-					foreach (var g in r.Genres)
+					/*foreach (var g in r.Genres)
 					{
 						movie.Genre.Add(g.Name);
-					}
-
-                    for (int i = 0; i < resp.Item.CastMembers.Count || i < 3; i++)
-                    {
-                        movie.Cast.Add(resp.Item.CastMembers[i].Name);
-                    }
+					}*/
                     
 					_movies.MovieList.Add(movie);
 				}

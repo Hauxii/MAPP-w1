@@ -11,6 +11,7 @@ namespace MovieSearch.iOS.Controllers
     public class MovieDetailController : UITableViewController
     {
 		private Movie movie;
+
         public MovieDetailController(Movie movie)
         {
 			this.movie = movie;
