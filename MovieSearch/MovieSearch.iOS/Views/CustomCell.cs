@@ -24,10 +24,10 @@ namespace MovieSearch.iOS.Views
 
             this._yearLabel = new UILabel()
             {
-                Font = UIFont.FromName("Marion-Italic", 15f), //TODO: ERLA FIX FONT PLS
-                TextColor = UIColor.FromRGB(130, 130, 130), //TODO: ERLA FIX THIS COLOR FIASKO
+                Font = UIFont.FromName("Marion-Italic", 15f), 
+                TextColor = UIColor.FromRGB(130, 130, 130), 
             };
-            
+			            
             this.ContentView.AddSubviews(new UIView[] {this._imageView, this._titleLabel, this._yearLabel});
         }
 

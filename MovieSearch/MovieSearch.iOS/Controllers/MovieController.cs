@@ -30,7 +30,7 @@ namespace MovieSearch.iOS.Controllers
 		{
 			base.ViewDidLoad();
 
-			this.Title = "TITLE";
+			this.Title = "Search";
 
 			MovieDbFactory.RegisterSettings(new DBSettings());
 			var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
@@ -69,7 +69,9 @@ namespace MovieSearch.iOS.Controllers
                     var movie = new Model.Movie()
                     {
                         Title = r.Title,
-                        Genre = r.Genres.ToString(),
+						Year = r.ReleaseDate.Year.ToString(),
+                        Genre = r.Genres.ToString()
+						//Overview = r.Overview
                         //TODO: MOAR INFO
                     };
 					_movies.MovieList.Add(movie);
