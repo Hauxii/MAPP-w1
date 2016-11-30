@@ -64,15 +64,21 @@ namespace MovieSearch.iOS.Controllers
 
 				_movies.MovieList.Clear();
 
+
 				foreach (var r in response.Results)
 				{
+					String[] genres = null;
+
+					foreach (var g in response.Results)
+					{
+					}
                     var movie = new Model.Movie()
                     {
                         Title = r.Title,
 						Year = r.ReleaseDate.Year.ToString(),
-                        Genre = r.Genres.ToString()
-						//Overview = r.Overview
-                        //TODO: MOAR INFO
+						Overview = r.Overview,
+						Poster = r.PosterPath
+                        //TODO: Cast
                     };
 					_movies.MovieList.Add(movie);
 				}
