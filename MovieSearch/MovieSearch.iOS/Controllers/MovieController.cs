@@ -78,8 +78,8 @@ namespace MovieSearch.iOS.Controllers
 					var localFilePath = getImage.LocalPathForFilename(r.PosterPath);
 					var image = getImage.DownloadImage(r.PosterPath, localFilePath, CancellationToken.None);
 
-					List<string> castList = new List<string>();
-					List<string> genreList = new List<string>();
+					var castList = new List<string>();
+					var genreList = new List<string>();
 
 					//Getting genres
 					foreach (var g in r.Genres)

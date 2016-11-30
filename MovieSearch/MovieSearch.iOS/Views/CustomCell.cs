@@ -9,7 +9,7 @@ namespace MovieSearch.iOS.Views
 {
     public class CustomCell : UITableViewCell
     {
-        private UILabel _titleLabel, _yearLabel;
+        private UILabel _titleLabel, _castLabel;
         private UIImageView _imageView;
 
         public CustomCell(NSString cellId) : base(UITableViewCellStyle.Default, cellId)
@@ -22,13 +22,13 @@ namespace MovieSearch.iOS.Views
                 TextColor = UIColor.FromRGB(60, 60, 60),
             };
 
-            this._yearLabel = new UILabel()
+            this._castLabel = new UILabel()
             {
                 Font = UIFont.FromName("Marion-Italic", 15f), 
                 TextColor = UIColor.FromRGB(130, 130, 130), 
             };
 			            
-            this.ContentView.AddSubviews(new UIView[] {this._imageView, this._titleLabel, this._yearLabel});
+            this.ContentView.AddSubviews(new UIView[] {this._imageView, this._titleLabel, this._castLabel});
         }
 
         public override void LayoutSubviews()
@@ -36,14 +36,14 @@ namespace MovieSearch.iOS.Views
             base.LayoutSubviews();
             this._imageView.Frame = new CGRect(5, 5, 30, 40);
             this._titleLabel.Frame = new CGRect(40, 5, this.ContentView.Bounds.Width - 60, 25);
-            this._yearLabel.Frame = new CGRect(40, 27, this.ContentView.Bounds.Width - 60, 20);
+            this._castLabel.Frame = new CGRect(40, 27, this.ContentView.Bounds.Width - 60, 20);
         }
 
-        public void UpdateCell(string image, string title, string year)
+		public void UpdateCell(string image, string title, List<string> cast)
         {
             this._imageView.Image = UIImage.FromFile(image); //TODO: GET IMAGE FROM API
             this._titleLabel.Text = title;
-            this._yearLabel.Text = year;
+			this._castLabel.Text = cast.ToArray()[0];
 
 			this.Accessory = UITableViewCellAccessory.DisclosureIndicator;
         }
