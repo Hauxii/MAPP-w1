@@ -13,9 +13,12 @@ namespace MovieSearch.iOS.Controllers
 
         public readonly NSString MovieListCellId = new NSString("MovieListCell");
 
-        public MovieListSource(List<Movie> _movieList)
+        private Action<int> _onSelectedMovie;
+
+        public MovieListSource(List<Movie> _movieList, Action<int> onSelectedMovie)
         {
             this._movieList = _movieList;
+            this._onSelectedMovie = onSelectedMovie;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)

@@ -23,9 +23,13 @@ namespace MovieSearch.iOS.Controllers
             this.Title = "Movie list";
             this.View.BackgroundColor = UIColor.White;
 
-            this.TableView.Source = new MovieListSource(this._movieList);
+            this.TableView.Source = new MovieListSource(this._movieList, OnSelectedMovie);
         }
 
+        public void OnSelectedMovie(int row)
+        {
+            var okAlertController = UIAlertController.Create("Selected movie", _movieList[row].Title, UIAlertControllerStyle.Alert);
+        }
 
     }
 }
