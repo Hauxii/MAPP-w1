@@ -67,43 +67,47 @@ namespace MovieSearch.iOS.Controllers
 				movieField.ResignFirstResponder();
 				ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(movieField.Text);
 
-                _movies.MovieList.Clear();
+                this._movies.MovieList.Clear();
 
 				var movieInfoList = response.Results;
 
-                foreach (var r in movieInfoList)
+				foreach (var r in movieInfoList)
 				{
-                    ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(r.Id);
+					ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(r.Id);
 
-				    var localFilePath = getImage.LocalPathForFilename(r.PosterPath);
-                    var bla = getImage.DownloadImage(r.PosterPath, localFilePath, CancellationToken.None);
-                    
+					var localFilePath = getImage.LocalPathForFilename(r.PosterPath);
+					var image = getImage.DownloadImage(r.PosterPath, localFilePath, CancellationToken.None);
 
-                    var movie = new Model.Movie()
-                    {
-                        Title = r.Title,
-                        Year = r.ReleaseDate.Year.ToString(),
-                        Overview = r.Overview,
-                        Poster = localFilePath
-                        //Cast and Genre populated in loops below
-                    };
+					List<string> castList = new List<string>();
+					List<string> genreList = new List<string>();
 
-					//getting genres
-					/*foreach (var g in r.Genres)
+					//Getting genres
+					foreach (var g in r.Genres)
 					{
-						movie.Genre.Add(g.Name);
-					}*/
-
-					//Getting 3 cast members
+						genreList.Add(g.Name);
+					}
 
 					var castMembers = resp.Item.CastMembers;
 
-                    for (int i = 0; i < castMembers.Count || i < 3; i++)
-                    {
-                        movie.Cast.Add(castMembers[i].Name);
-                    }
-                    
-					this._movies.MovieList.Add(movie);
+					//Getting 3 cast members
+					int k;
+					for (k = 0; k < 3 && k < castMembers.Count; k++)
+					{
+						castList.Add(castMembers[k].Name);
+					}
+
+					Model.Movie movie = new Model.Movie()
+					{
+						Title = r.Title,
+						Year = r.ReleaseDate.Year.ToString(),
+						Overview = r.Overview,
+						Poster = localFilePath,
+						Cast = castList,
+						Genre = genreList
+					};
+
+					populateMovieList(movie);
+					//this._movies.MovieList.Add(movie);
 				}
 
 				this.NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
@@ -115,7 +119,11 @@ namespace MovieSearch.iOS.Controllers
 			this.View.AddSubview(prompt);
 			this.View.AddSubview(movieField);
 			this.View.AddSubview(searchButton);
+		}
 
+		private void populateMovieList(Model.Movie movie)
+		{
+			this._movies.MovieList.Add(movie);
 		}
 
 		private UIButton CreateButton(string title)
