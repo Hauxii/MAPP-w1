@@ -44,6 +44,8 @@ namespace MovieSearch.iOS.Views
             this._imageView.Image = UIImage.FromFile(string.Empty); //TODO: GET IMAGE FROM API
             this._titleLabel.Text = title;
             this._yearLabel.Text = year;
+
+			this.Accessory = UITableViewCellAccessory.DisclosureIndicator;
         }
     }
 }
