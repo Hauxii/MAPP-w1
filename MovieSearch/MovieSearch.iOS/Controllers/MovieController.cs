@@ -66,13 +66,17 @@ namespace MovieSearch.iOS.Controllers
 
 				foreach (var r in response.Results)
 				{
+                    ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(r.Id);
+
                     var movie = new Model.Movie()
                     {
                         Title = r.Title,
 						Year = r.ReleaseDate.Year.ToString(),
                         Genre = r.Genres.ToString()
 						//Overview = r.Overview
+                        
                         //TODO: MOAR INFO
+                        
                     };
 					_movies.MovieList.Add(movie);
 				}
