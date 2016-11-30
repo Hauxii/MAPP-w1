@@ -107,7 +107,6 @@ namespace MovieSearch.iOS.Controllers
 					};
 
 					populateMovieList(movie);
-					//this._movies.MovieList.Add(movie);
 				}
 
 				this.NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
