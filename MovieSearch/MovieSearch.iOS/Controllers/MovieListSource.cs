@@ -34,7 +34,7 @@ namespace MovieSearch.iOS.Controllers
 
 			string titleyear = this._movieList[row].Title + " (" + this._movieList[row].Year + ")";
 
-			cell.UpdateCell(titleyear, this._movieList[row].Title, this._movieList[row].Poster/*this._movieList[row].Cast.ToString(), this._movieList[row].Poster*/);
+			cell.UpdateCell(this._movieList[row].Poster, titleyear, this._movieList[row].Title /*this._movieList[row].Cast.ToString(), this._movieList[row].Poster*/);
             return cell;
         }
 

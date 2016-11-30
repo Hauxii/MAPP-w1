@@ -34,12 +34,12 @@ namespace MovieSearch.iOS.Views
         public override void LayoutSubviews()
         {
             base.LayoutSubviews();
-            this._imageView.Frame = new CGRect(this.ContentView.Bounds.Width - 60, 5, 33, 33);
-            this._titleLabel.Frame = new CGRect(5, 5, this.ContentView.Bounds.Width - 60, 25);
-            this._yearLabel.Frame = new CGRect(5, 27, this.ContentView.Bounds.Width - 60, 20);
+            this._imageView.Frame = new CGRect(5, 5, 30, 40);
+            this._titleLabel.Frame = new CGRect(40, 5, this.ContentView.Bounds.Width - 60, 25);
+            this._yearLabel.Frame = new CGRect(40, 27, this.ContentView.Bounds.Width - 60, 20);
         }
 
-        public void UpdateCell(string title, string year, string image)
+        public void UpdateCell(string image, string title, string year)
         {
             this._imageView.Image = UIImage.FromFile(image); //TODO: GET IMAGE FROM API
             this._titleLabel.Text = title;
