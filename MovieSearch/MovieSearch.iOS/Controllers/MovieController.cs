@@ -67,6 +67,8 @@ namespace MovieSearch.iOS.Controllers
 
 				foreach (var r in response.Results)
 				{
+                    ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(r.Id);
+
 					String[] genres = null;
 
 					foreach (var g in response.Results)
@@ -76,6 +78,10 @@ namespace MovieSearch.iOS.Controllers
                     {
                         Title = r.Title,
 						Year = r.ReleaseDate.Year.ToString(),
+                        Genre = r.Genres.ToString(),
+						//Overview = r.Overview
+                        
+                        //TODO: MOAR INFO
 						Overview = r.Overview,
 						Poster = r.PosterPath
                         //TODO: Cast
