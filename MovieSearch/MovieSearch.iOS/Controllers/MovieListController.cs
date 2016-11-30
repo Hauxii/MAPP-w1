@@ -29,6 +29,11 @@ namespace MovieSearch.iOS.Controllers
         public void OnSelectedMovie(int row)
         {
             var okAlertController = UIAlertController.Create("Selected movie", _movieList[row].Title, UIAlertControllerStyle.Alert);
+
+            //TODO: CHANGE TO NEW PAGE
+            okAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, );
+
+            this.PresentViewController(okAlertController, true, null);
         }
 
     }

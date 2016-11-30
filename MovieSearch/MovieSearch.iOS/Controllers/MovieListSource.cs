@@ -41,7 +41,8 @@ namespace MovieSearch.iOS.Controllers
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
-            base.RowSelected(tableView, indexPath);
+            //base.RowSelected(tableView, indexPath);
+            tableView.DeselectRow(indexPath, true);
             this._onSelectedMovie(indexPath.Row);
         }
 
