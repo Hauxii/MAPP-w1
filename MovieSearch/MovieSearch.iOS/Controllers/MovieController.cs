@@ -65,7 +65,9 @@ namespace MovieSearch.iOS.Controllers
 
                 _movies.MovieList.Clear();
 
-                foreach (var r in response.Results)
+				var movieInfoList = response.Results;
+
+                foreach (var r in movieInfoList)
 				{
                     ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(r.Id);
 
@@ -78,17 +80,20 @@ namespace MovieSearch.iOS.Controllers
                         //Cast and Genre populated in loops below
                     };
 
-                    //getting genres
+					//getting genres
 					/*foreach (var g in r.Genres)
 					{
 						movie.Genre.Add(g.Name);
 					}*/
 
-                    //Getting 3 cast members
-                    /*for (int i = 0; i < resp.Item.CastMembers.Count || i < 3; i++)
+					//Getting 3 cast members
+
+					var castMembers = resp.Item.CastMembers;
+
+                    for (int i = 0; i < castMembers.Count || i < 3; i++)
                     {
-                        movie.Cast.Add(resp.Item.CastMembers[i].Name);
-                    }*/
+                        movie.Cast.Add(castMembers[i].Name);
+                    }
                     
 					_movies.MovieList.Add(movie);
 				}
