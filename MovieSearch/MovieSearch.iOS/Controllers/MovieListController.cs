@@ -2,16 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MovieSearch.Model;
 
 using UIKit;
 
-namespace MovieSearch.iOS
+namespace MovieSearch.iOS.Controllers
 {
     public class MovieListController : UITableViewController
     {
-        private List<string> _movieList;
+        private List<Movie> _movieList;
 
-        public MovieListController(List<string> movieList)
+        public MovieListController(List<Movie> movieList)
         {
             this._movieList = movieList;
             

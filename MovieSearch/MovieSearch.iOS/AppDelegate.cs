@@ -1,5 +1,6 @@
 ﻿using Foundation;
 using UIKit;
+using MovieSearch.iOS.Controllers;
 
 namespace MovieSearch.iOS
 {

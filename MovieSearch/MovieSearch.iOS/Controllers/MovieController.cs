@@ -5,8 +5,9 @@ using UIKit;
 using CoreGraphics;
 using DM.MovieApi.MovieDb.Movies;
 using DM.MovieApi.ApiResponse;
+using MovieSearch.Model;
 
-namespace MovieSearch.iOS
+namespace MovieSearch.iOS.Controllers
 
 {
 	public class MovieController : UIViewController
@@ -65,7 +66,13 @@ namespace MovieSearch.iOS
 
 				foreach (var r in response.Results)
 				{
-					_movies.MovieList.Add(r.Title);
+                    var movie = new Model.Movie()
+                    {
+                        Title = r.Title,
+                        Genre = r.Genres.ToString(),
+                        //TODO: MOAR INFO
+                    };
+					_movies.MovieList.Add(movie);
 				}
 
 				this.NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);

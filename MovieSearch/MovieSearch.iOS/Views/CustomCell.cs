@@ -14,7 +14,7 @@ namespace MovieSearch.iOS.Views
 
         public CustomCell(NSString cellId) : base(UITableViewCellStyle.Default, cellId)
         {
-            this._imageView = new UIImageView(); //TODO: GET IMAGE FROM API
+            this._imageView = new UIImageView();
 
             this._titleLabel = new UILabel()
             {

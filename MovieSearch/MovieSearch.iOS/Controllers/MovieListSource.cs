@@ -1,31 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using Foundation;
+using MovieSearch.iOS.Views;
 using UIKit;
+using MovieSearch.Model;
 
-namespace MovieSearch.iOS
+namespace MovieSearch.iOS.Controllers
 {
     public class MovieListSource : UITableViewSource
     {
-        private List<string> _movieList;
+        private List<Movie> _movieList;
 
         public readonly NSString MovieListCellId = new NSString("MovieListCell");
 
-        public MovieListSource(List<string> _movieList)
+        public MovieListSource(List<Movie> _movieList)
         {
             this._movieList = _movieList;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
-            var cell = tableView.DequeueReusableCell(MovieListCellId);
+            var cell = (CustomCell)tableView.DequeueReusableCell(MovieListCellId);
             if (cell == null)
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, this.MovieListCellId);
+                cell = new CustomCell(this.MovieListCellId);
             }
 
             int row = indexPath.Row;
-            cell.TextLabel.Text = this._movieList[row];
+            cell.UpdateCell(this._movieList[row].Title, this._movieList[row].Title /*TODO: CHANGE*/, this._movieList[row].Title/*TODO: CHANGE*/);
             return cell;
         }
 

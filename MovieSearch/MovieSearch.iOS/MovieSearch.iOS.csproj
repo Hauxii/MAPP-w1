@@ -145,11 +145,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MovieListController.cs" />
-    <Compile Include="MovieController.cs" />
+    <Compile Include="Controllers\MovieListController.cs" />
+    <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="MovieListSource.cs" />
+    <Compile Include="Controllers\MovieListSource.cs" />
     <Compile Include="Views\CustomCell.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
