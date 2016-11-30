@@ -35,5 +35,13 @@ namespace MovieSearch.iOS.Controllers
         {
             return this._movieList.Count;
         }
+
+        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        {
+            base.RowSelected(tableView, indexPath);
+            this._onSelectedMovie(indexPath.Row);
+        }
+
+
     }
 }
