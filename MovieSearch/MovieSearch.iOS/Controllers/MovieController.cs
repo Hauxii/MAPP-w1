@@ -62,30 +62,36 @@ namespace MovieSearch.iOS.Controllers
 				movieField.ResignFirstResponder();
 				ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(movieField.Text);
 
-				_movies.MovieList.Clear();
+                _movies.MovieList.Clear();
 
-
-				foreach (var r in response.Results)
+                foreach (var r in response.Results)
 				{
                     ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(r.Id);
+
+                    var movie = new Model.Movie()
+                    {
+                        Title = r.Title,
+                        Year = r.ReleaseDate.Year.ToString(),
+                        Genre = r.Genres.ToString(),
+                        //Overview = r.Overview
+
+                        //TODO: MOAR INFO
+                        Overview = r.Overview,
+                        Poster = r.PosterPath
+                        //TODO: Cast
+                    };
+
+                    for (int i = 0; i < resp.Item.CastMembers.Count || i < 3; i++)
+                    {
+                        movie.Cast.Add(resp.Item.CastMembers[i].Name);
+                    }
 
 					String[] genres = null;
 
 					foreach (var g in response.Results)
 					{
 					}
-                    var movie = new Model.Movie()
-                    {
-                        Title = r.Title,
-						Year = r.ReleaseDate.Year.ToString(),
-                        Genre = r.Genres.ToString(),
-						//Overview = r.Overview
-                        
-                        //TODO: MOAR INFO
-						Overview = r.Overview,
-						Poster = r.PosterPath
-                        //TODO: Cast
-                    };
+                    
 					_movies.MovieList.Add(movie);
 				}
 
