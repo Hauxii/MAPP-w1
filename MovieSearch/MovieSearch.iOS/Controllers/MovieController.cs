@@ -76,7 +76,8 @@ namespace MovieSearch.iOS.Controllers
                     ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(r.Id);
 
 				    var localFilePath = getImage.LocalPathForFilename(r.PosterPath);
-                    getImage.DownloadImage(r.PosterPath, localFilePath, CancellationToken.None);
+                    var bla = getImage.DownloadImage(r.PosterPath, localFilePath, CancellationToken.None);
+                    
 
                     var movie = new Model.Movie()
                     {
@@ -102,7 +103,7 @@ namespace MovieSearch.iOS.Controllers
                         movie.Cast.Add(castMembers[i].Name);
                     }
                     
-					_movies.MovieList.Add(movie);
+					this._movies.MovieList.Add(movie);
 				}
 
 				this.NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
