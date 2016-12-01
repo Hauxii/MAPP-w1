@@ -43,9 +43,13 @@ namespace MovieSearch.iOS.Views
         {
             this._imageView.Image = UIImage.FromFile(image);
             this._titleLabel.Text = title;
-			foreach (var c in cast)
+			for (int i = 0; i < cast.Count; i++)
 			{
-				this._castLabel.Text += c + ", ";
+				this._castLabel.Text += cast[i];
+				if (i + 1 != cast.Count)
+				{
+					this._castLabel.Text += ", ";
+				}
 			}
 
 			this.Accessory = UITableViewCellAccessory.DisclosureIndicator;
