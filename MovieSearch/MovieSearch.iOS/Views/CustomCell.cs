@@ -43,7 +43,10 @@ namespace MovieSearch.iOS.Views
         {
             this._imageView.Image = UIImage.FromFile(image); //TODO: GET IMAGE FROM API
             this._titleLabel.Text = title;
-			this._castLabel.Text = cast.ToArray()[0];
+			foreach (var c in cast)
+			{
+				this._castLabel.Text += c + ", ";
+			}
 
 			this.Accessory = UITableViewCellAccessory.DisclosureIndicator;
         }
