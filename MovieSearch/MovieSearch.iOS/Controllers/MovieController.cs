@@ -101,6 +101,7 @@ namespace MovieSearch.iOS.Controllers
 
 					Model.Movie movie = new Model.Movie()
 					{
+						ID = r.Id,
 						Title = r.Title,
 						Year = r.ReleaseDate.Year.ToString(),
 						Overview = r.Overview,
