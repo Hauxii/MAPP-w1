@@ -37,12 +37,11 @@ namespace MovieSearch.iOS.Controllers
 			await resourceProvider.GetTopRated(this._movies);
 
 			this.TableView.Source = new MovieListSource(this._movies.MovieList, OnSelectedMovie);
+
 			this.TableView.ReloadData();
 
-			//NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
 			indicator.StopAnimating();
 
-			//indicator.StopAnimating();
 		}
 
 		public void OnSelectedMovie(int row)
@@ -52,9 +51,10 @@ namespace MovieSearch.iOS.Controllers
 
 		private UIActivityIndicatorView CreateLoadingSpinner()
 		{
-			UIActivityIndicatorView loading = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray);
+			UIActivityIndicatorView loading = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.WhiteLarge);
 			loading.Frame = new CGRect((this.View.Bounds.Width /2) - 25, (this.View.Bounds.Height/2) - 50, 50, 50);
 			loading.HidesWhenStopped = true;
+			loading.Color = UIColor.Gray;
 			return loading;
 		}
     }

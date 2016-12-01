@@ -58,7 +58,7 @@ namespace MovieSearch.iOS.Controllers
 
 			var prevS = CreatePrompt("Previous searches:");
 			this.View.AddSubview(prevS);
-			this._yCoord += StepY;
+			this._yCoord += StepY/2;
 
 			var loading = CreateLoadingSpinner();
 			loading.StopAnimating();
@@ -67,9 +67,7 @@ namespace MovieSearch.iOS.Controllers
 			{
 				if (movieField.Text.Length == 0)
 				{
-					var okAlertController = UIAlertController.Create("Invalid input", "Please enter a valid input", UIAlertControllerStyle.Alert);
-					okAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
-					this.PresentViewController(okAlertController, true, null);
+					CreateAlertWithMessage("Invalid input", "Please enter a valid input");
 				}
 				else {
 					searchButton.Enabled = false;
@@ -81,11 +79,17 @@ namespace MovieSearch.iOS.Controllers
 
 					await resourceProvider.GetMoviesByTitle(this._movies, movieField.Text);
 
-					NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
+					if (this._movies.MovieList.Count == 0)
+					{
+						CreateAlertWithMessage("No movies", "There are no movies in the database containing this set of words");
+					}
+					else {
+						NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
+					}
 
 					var ps = CreatePrompt(movieField.Text);
 					this.View.AddSubview(ps);
-					this._yCoord += StepY;
+					this._yCoord += StepY / 2;
 
 					loading.StopAnimating();
 					searchButton.Enabled = true;
@@ -136,6 +140,13 @@ namespace MovieSearch.iOS.Controllers
 			loading.Frame = new CGRect(HorizontalMargin, 180, this.View.Bounds.Width - 2 * HorizontalMargin, 50);
 			loading.HidesWhenStopped = true;
 			return loading;
+		}
+
+		private void CreateAlertWithMessage(string header, string message)
+		{
+			var okAlertController = UIAlertController.Create(header, message, UIAlertControllerStyle.Alert);
+			okAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+			this.PresentViewController(okAlertController, true, null);
 		}
     }
 }
