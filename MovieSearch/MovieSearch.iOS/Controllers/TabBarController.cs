@@ -14,7 +14,7 @@ namespace MovieSearch.iOS.Controllers
 			base.ViewDidLoad();
 
 			this.TabBar.BackgroundColor = UIColor.LightGray;
-			this.TabBar.TintColor = UIColor.Red;
+			this.TabBar.TintColor = UIColor.Blue;
 
 			//index of the tabbar that is selected at the beginning
 			this.SelectedIndex = 0;

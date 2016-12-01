@@ -29,14 +29,14 @@ namespace MovieSearch.iOS
 			var movieController = new MovieController(movies.MovieList);			
 			var movieNavigationController = new UINavigationController(movieController);
 
-			var movieCollectionController = new MovieCollectionController(this.CreateFlowLayout(), movies.MovieList);
-			var movieCollectionNavigationController = new UINavigationController(movieCollectionController);
+			var movieTopRatedController = new MovieTopRatedController(movies.MovieList);
+			var movieTopRatedNavigationController = new UINavigationController(movieTopRatedController);
 
 			var tabBarController = new TabBarController()
 			{
 				ViewControllers = new UIViewController[]
 				{
-					movieNavigationController, movieCollectionNavigationController	
+					movieNavigationController, movieTopRatedNavigationController	
 				}
 
 			};

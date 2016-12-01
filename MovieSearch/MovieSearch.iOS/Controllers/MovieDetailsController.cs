@@ -41,10 +41,9 @@ namespace MovieSearch.iOS.Controllers
 
 			var title = CreateTitle();
 
-			this._yCoord += StepY;
-
 			var runtime = CreateRunningTimeAndGenre();
 
+			this._yCoord += StepY;
 			this._yCoord += StepY;
 
 			var poster = CreatePoster();
@@ -73,8 +72,8 @@ namespace MovieSearch.iOS.Controllers
 		{
 			var overview = new UILabel()
 			{
-				Frame = new CGRect(100, this._yCoord, this.View.Bounds.Width - HorizontalMargin - 100, 100),
-				Font = UIFont.FromName("Arial", 12f),
+				Frame = new CGRect(120, this._yCoord, this.View.Bounds.Width - HorizontalMargin - 120, 120),
+				Font = UIFont.FromName("Arial", 13f),
 				Text = movie.Overview,
 				Lines = 0,
 				LineBreakMode = UILineBreakMode.WordWrap
