@@ -26,13 +26,13 @@ namespace MovieSearch.iOS.Controllers
 
 		private Movies _movies;
 
-		private MovieImageDownloader _imgDl;
+		private MovieResourceProvider _imgDl;
 
 		public MovieController(Movies movies)
 		{ 
 			this._movies = movies;
 
-			this._imgDl = new MovieImageDownloader();
+			this._imgDl = new MovieResourceProvider();
 
 			this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Search, 0);
 		}
@@ -72,9 +72,9 @@ namespace MovieSearch.iOS.Controllers
 					this.View.AddSubview(loading);
 					loading.StartAnimating();
 
-					MovieImageDownloader imgDl = new MovieImageDownloader();
+					MovieResourceProvider resourceProvider = new MovieResourceProvider();
 
-					await imgDl.GetMoviesByTitle(this._movies, movieField.Text);
+					await resourceProvider.GetMoviesByTitle(this._movies, movieField.Text);
 
 					NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
 					loading.StopAnimating();

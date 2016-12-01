@@ -10,11 +10,11 @@ using DM.MovieApi.ApiResponse;
 
 namespace MovieSearch.iOS
 {
-	public class MovieImageDownloader
+	public class MovieResourceProvider
 	{
 		private ImageDownloader _imageDl;
 
-		public MovieImageDownloader()
+		public MovieResourceProvider()
 		{
 			this._imageDl = new ImageDownloader(new StorageClient());
 		}
