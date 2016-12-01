@@ -157,7 +157,7 @@
     <Compile Include="Controllers\TabBarController.cs" />
     <Compile Include="Controllers\MovieTopRatedController.cs" />
     <Compile Include="Views\CustomCollectionCell.cs" />
-    <Compile Include="Controllers\MovieImageDownloader.cs" />
+    <Compile Include="Controllers\MovieResourceProvider.cs" />
   </ItemGroup>
   <Import Project="..\..\MovieDownload\MovieDownload.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
