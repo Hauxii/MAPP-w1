@@ -53,6 +53,7 @@ namespace MovieSearch.iOS.Controllers
 			this.View.AddSubview(title);
 			this.View.AddSubview(overview);
 			this.View.AddSubview(runtime);
+			this.View.AddSubview(poster);
 
 
 		}
@@ -101,9 +102,14 @@ namespace MovieSearch.iOS.Controllers
 			return subtitle;
 		}
 
-		private UIImage CreatePoster()
+		private UIImageView CreatePoster()
 		{
-			return null; //movie.Poster;
+			var img = new UIImageView()
+			{
+				Frame = new CGRect(HorizontalMargin, this._yCoord, 50, 100),
+				Image = UIImage.FromFile(this.movie.Poster)
+			};
+			return img; //movie.Poster;
 		}
 	}
 }

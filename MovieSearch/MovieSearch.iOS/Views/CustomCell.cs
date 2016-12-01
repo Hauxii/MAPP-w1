@@ -41,7 +41,7 @@ namespace MovieSearch.iOS.Views
 
 		public void UpdateCell(string image, string title, List<string> cast)
         {
-            this._imageView.Image = UIImage.FromFile(image); //TODO: GET IMAGE FROM API
+            this._imageView.Image = UIImage.FromFile(image);
             this._titleLabel.Text = title;
 			foreach (var c in cast)
 			{
