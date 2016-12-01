@@ -73,9 +73,11 @@ namespace MovieSearch.iOS.Controllers
 		{
 			var overview = new UILabel()
 			{
-				Frame = new CGRect(100, this._yCoord, this.View.Bounds.Width - HorizontalMargin * 2, 100),
+				Frame = new CGRect(100, this._yCoord, this.View.Bounds.Width - HorizontalMargin - 100, 100),
 				Font = UIFont.FromName("Arial", 12f),
-				Text = movie.Overview
+				Text = movie.Overview,
+				Lines = 0,
+				LineBreakMode = UILineBreakMode.WordWrap
 			};
 
 
@@ -86,7 +88,8 @@ namespace MovieSearch.iOS.Controllers
 		{
 			var subtitle = new UILabel()
 			{
-				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - HorizontalMargin * 2, 20),
+				
+				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - HorizontalMargin * 2, 70),
 				Font = UIFont.FromName("Arial", 15f),
 				Text = this.movie.Runtime + " min | ",
 			};
