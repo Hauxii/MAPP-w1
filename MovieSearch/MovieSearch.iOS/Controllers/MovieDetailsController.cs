@@ -24,12 +24,15 @@ namespace MovieSearch.iOS.Controllers
 			this.movie = movie;
 		}
 
-		public override void ViewDidLoad()
+		public override async void ViewDidLoad()
 		{
 			base.ViewDidLoad();
 
 			MovieDbFactory.RegisterSettings(new DBSettings());
 			var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
+			var movieDetails = await movieApi.FindByIdAsync(movie.ID);
+
+			this.movie.Runtime = movieDetails.Item.Runtime.ToString();
 
 			this.Title = "Movie details";
 			this.View.BackgroundColor = UIColor.White;
