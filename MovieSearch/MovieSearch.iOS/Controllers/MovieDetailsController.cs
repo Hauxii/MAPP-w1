@@ -27,15 +27,21 @@ namespace MovieSearch.iOS.Controllers
 		public override async void ViewDidLoad()
 		{
 			base.ViewDidLoad();
+			this.Title = "Movie details";
+			this.View.BackgroundColor = UIColor.White;
+
+			var loading = CreateLoadingSpinner();
+			loading.StartAnimating();
+			this.View.AddSubview(loading);
 
 			MovieDbFactory.RegisterSettings(new DBSettings());
 			var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
 			var movieDetails = await movieApi.FindByIdAsync(movie.ID);
+			loading.StopAnimating();
 
 			this.movie.Runtime = movieDetails.Item.Runtime.ToString();
 
-			this.Title = "Movie details";
-			this.View.BackgroundColor = UIColor.White;
+
 
 			this._yCoord = StartY;
 
@@ -111,6 +117,14 @@ namespace MovieSearch.iOS.Controllers
 				Image = UIImage.FromFile(this.movie.Poster)
 			};
 			return img; //movie.Poster;
+		}
+
+		private UIActivityIndicatorView CreateLoadingSpinner()
+		{
+			UIActivityIndicatorView loading = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray);
+			loading.Frame = new CGRect((this.View.Bounds.Width/2) - 25, this.View.Bounds.Height/2, 50, 50);
+			loading.HidesWhenStopped = true;
+			return loading;
 		}
 	}
 }
