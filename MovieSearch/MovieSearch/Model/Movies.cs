@@ -32,6 +32,8 @@ namespace MovieSearch.Model
 
 		public  void ExtractInfo(MovieInfo movieInfo ,ApiQueryResponse<MovieCredit> response)
 		{
+			ClearList();
+
 			List<string> cast = new List<string>();
 			List<string> genre = new List<string>();
 

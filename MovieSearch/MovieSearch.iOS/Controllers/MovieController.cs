@@ -76,10 +76,6 @@ namespace MovieSearch.iOS.Controllers
 
 					await imgDl.GetMoviesByTitle(this._movies, movieField.Text);
 
-					//await this._movies.searchByTitle(movieField.Text);
-
-					//await _imgDl.populateImages(_movies.MovieList);
-
 					NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
 					loading.StopAnimating();
 					searchButton.Enabled = true;
