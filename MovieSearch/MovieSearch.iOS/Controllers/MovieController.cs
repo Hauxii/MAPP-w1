@@ -23,10 +23,13 @@ namespace MovieSearch.iOS.Controllers
 
 		private int _yCoord;
 
-		private Movies _movies;
-		public MovieController()
+		private List<Model.Movie> _movieList;
+
+		public MovieController(List<Model.Movie> movieList)
 		{
-			this._movies = new Movies();
+			this._movieList = movieList;
+
+			this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Search, 0);
 		}
 
 		public override void ViewDidLoad()
@@ -67,7 +70,7 @@ namespace MovieSearch.iOS.Controllers
 				movieField.ResignFirstResponder();
 				ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(movieField.Text);
 
-                this._movies.MovieList.Clear();
+				this._movieList.Clear();
 
 				var movieInfoList = response.Results;
 
@@ -109,7 +112,7 @@ namespace MovieSearch.iOS.Controllers
 					populateMovieList(movie);
 				}
 
-				this.NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
+				NavigationController.PushViewController(new MovieListController(this._movieList), true);
                 loading.StopAnimating();
 				searchButton.Enabled = true;
 				loading.StopAnimating();
@@ -122,7 +125,7 @@ namespace MovieSearch.iOS.Controllers
 
 		private void populateMovieList(Model.Movie movie)
 		{
-			this._movies.MovieList.Add(movie);
+			this._movieList.Add(movie);
 		}
 
 		private UIButton CreateButton(string title)

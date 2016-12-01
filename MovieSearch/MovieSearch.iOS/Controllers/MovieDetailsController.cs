@@ -8,7 +8,7 @@ using UIKit;
 namespace MovieSearch.iOS.Controllers
 {
 	public class MovieDetailController : UIViewController
-    {
+	{
 		private const int HorizontalMargin = 20;
 
 		private const int StartY = 80;
@@ -20,9 +20,9 @@ namespace MovieSearch.iOS.Controllers
 		private MovieSearch.Model.Movie movie;
 
 		public MovieDetailController(MovieSearch.Model.Movie movie)
-        {
+		{
 			this.movie = movie;
-        }
+		}
 
 		public override void ViewDidLoad()
 		{
@@ -32,7 +32,7 @@ namespace MovieSearch.iOS.Controllers
 			var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
 
 			this.Title = "Movie details";
-            this.View.BackgroundColor = UIColor.White;
+			this.View.BackgroundColor = UIColor.White;
 
 			this._yCoord = StartY;
 
@@ -40,7 +40,10 @@ namespace MovieSearch.iOS.Controllers
 
 			this._yCoord += StepY;
 
+			var poster = CreatePoster();
+
 			this.View.AddSubview(title);
+
 
 		}
 
@@ -49,8 +52,8 @@ namespace MovieSearch.iOS.Controllers
 			string titleyear = movie.Title + " (" + movie.Year + ")";
 			var title = new UILabel()
 			{
-				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - HorizontalMargin*2, 50),
-                Font = UIFont.FromName("Marion", 22f),
+				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - HorizontalMargin * 2, 50),
+				Font = UIFont.FromName("Marion", 22f),
 				Text = titleyear
 			};
 			return title;
@@ -58,7 +61,16 @@ namespace MovieSearch.iOS.Controllers
 
 		private UILabel CreateRunningTimeAndGenre()
 		{
+			/*var subtitle = new UILabel())
+			{
+				Text = movie.Runtime
+			};*/
 			return null;
 		}
-    }
+
+		private UIImage CreatePoster()
+		{
+			return null; //movie.Poster;
+		}
+	}
 }

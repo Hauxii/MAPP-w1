@@ -1,6 +1,8 @@
 ﻿using Foundation;
 using UIKit;
 using MovieSearch.iOS.Controllers;
+using System.Drawing;
+using MovieSearch.Model;
 
 namespace MovieSearch.iOS
 {
@@ -16,18 +18,46 @@ namespace MovieSearch.iOS
 			set;
 		}
 
-		public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
+		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
-            // Override point for customization after application launch.
-            // If not required for your application you can safely delete this method
-            this.Window = new UIWindow(UIScreen.MainScreen.Bounds);
+			// Override point for customization after application launch.
+			// If not required for your application you can safely delete this method
+			this.Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            var controller = new MovieController();
-            this.Window.RootViewController = new UINavigationController(controller);
+			var movies = new Movies();
+
+			var movieController = new MovieController(movies.MovieList);			
+			var movieNavigationController = new UINavigationController(movieController);
+
+			var movieCollectionController = new MovieCollectionController(this.CreateFlowLayout(), movies.MovieList);
+			var movieCollectionNavigationController = new UINavigationController(movieCollectionController);
+
+			var tabBarController = new TabBarController()
+			{
+				ViewControllers = new UIViewController[]
+				{
+					movieNavigationController, movieCollectionNavigationController	
+				}
+
+			};
+
+			this.Window.RootViewController = tabBarController;
 
             this.Window.MakeKeyAndVisible();
+
             return true;
 		}
+
+		private UICollectionViewFlowLayout CreateFlowLayout()
+		{
+			return new UICollectionViewFlowLayout()
+			{	
+				MinimumInteritemSpacing = 5,
+				MinimumLineSpacing = 5,
+				ItemSize = new SizeF(80, 80)
+			};
+		}
+
 
 		public override void OnResignActivation (UIApplication application)
 		{
