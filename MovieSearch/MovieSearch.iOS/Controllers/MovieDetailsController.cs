@@ -13,7 +13,7 @@ namespace MovieSearch.iOS.Controllers
 
 		private const int StartY = 80;
 
-		private const int StepY = 20;
+		private const int StepY = 30;
 
 		private int _yCoord;
 
@@ -43,10 +43,11 @@ namespace MovieSearch.iOS.Controllers
 
 			this._yCoord += StepY;
 
-			var poster = CreatePoster();
-
 			var runtime = CreateRunningTimeAndGenre();
+
 			this._yCoord += StepY;
+
+			var poster = CreatePoster();
 
 			var overview = CreateOverview();
 
@@ -106,7 +107,7 @@ namespace MovieSearch.iOS.Controllers
 		{
 			var img = new UIImageView()
 			{
-				Frame = new CGRect(HorizontalMargin, this._yCoord, 50, 100),
+				Frame = new CGRect(HorizontalMargin, this._yCoord, 90, 135),
 				Image = UIImage.FromFile(this.movie.Poster)
 			};
 			return img; //movie.Poster;
