@@ -51,7 +51,7 @@ namespace MovieSearch.iOS
 				var localFilePath = _imageDl.LocalPathForFilename(m.PosterPath);
 				if (localFilePath != string.Empty)
 				{
-					var image = _imageDl.DownloadImage(m.PosterPath, localFilePath, CancellationToken.None);
+					 await _imageDl.DownloadImage(m.PosterPath, localFilePath, CancellationToken.None);
 				}
 				m.PosterPath = localFilePath;
 				movies.ExtractInfo(m, movieCreditsResponse);
