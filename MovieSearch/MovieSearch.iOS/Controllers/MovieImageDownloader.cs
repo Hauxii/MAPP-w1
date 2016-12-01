@@ -26,6 +26,8 @@ namespace MovieSearch.iOS
 
 			var movieInfoResponse = await movieApi.SearchByTitleAsync(title);
 
+			movies.ClearList();
+
 			foreach (var m in movieInfoResponse.Results)
 			{
 				ApiQueryResponse<MovieCredit> movieCreditsResponse = await movieApi.GetCreditsAsync(m.Id);
