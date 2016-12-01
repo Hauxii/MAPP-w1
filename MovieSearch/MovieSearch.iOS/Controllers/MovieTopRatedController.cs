@@ -12,7 +12,7 @@ using DM.MovieApi.ApiResponse;
 
 namespace MovieSearch.iOS.Controllers
 {
-	public class MovieTopRatedController : UIViewController
+	public class MovieTopRatedController : UITableViewController
     {
 		private Movies _movies;
 
@@ -33,8 +33,11 @@ namespace MovieSearch.iOS.Controllers
 			indicator.StartAnimating();
 			this.View.AddSubview(indicator);
 
-			//GET TOP RATED
-			//PUSH MOVIELIST
+			MovieResourceProvider resourceProvider = new MovieResourceProvider();
+			await resourceProvider.GetTopRated(this._movies);
+
+			this.TableView.Source = new MovieListSource(this._movies.MovieList, OnSelectedMovie);
+			this.TableView.ReloadData();
 
 			//NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
 			indicator.StopAnimating();
@@ -42,10 +45,15 @@ namespace MovieSearch.iOS.Controllers
 			//indicator.StopAnimating();
 		}
 
+		public void OnSelectedMovie(int row)
+		{
+			this.NavigationController.PushViewController(new MovieDetailController(_movies.MovieList[row]), true);
+		}
+
 		private UIActivityIndicatorView CreateLoadingSpinner()
 		{
 			UIActivityIndicatorView loading = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray);
-			loading.Frame = new CGRect((this.View.Bounds.Width /2) - 25, this.View.Bounds.Height / 2, 50, 50);
+			loading.Frame = new CGRect((this.View.Bounds.Width /2) - 25, (this.View.Bounds.Height/2) - 50, 50, 50);
 			loading.HidesWhenStopped = true;
 			return loading;
 		}

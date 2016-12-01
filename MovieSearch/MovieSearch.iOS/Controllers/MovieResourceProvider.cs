@@ -13,24 +13,40 @@ namespace MovieSearch.iOS
 	public class MovieResourceProvider
 	{
 		private ImageDownloader _imageDl;
+		private IApiMovieRequest _movieApi;
 
 		public MovieResourceProvider()
 		{
 			this._imageDl = new ImageDownloader(new StorageClient());
+			MovieDbFactory.RegisterSettings(new DBSettings());
+			_movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
 		}
 
 		public async Task GetMoviesByTitle(Movies movies, string title)
 		{
-			MovieDbFactory.RegisterSettings(new DBSettings());
-			var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
+			var movieInfoResponse = await _movieApi.SearchByTitleAsync(title);
 
-			var movieInfoResponse = await movieApi.SearchByTitleAsync(title);
+			await populateInfoHelper(movies, movieInfoResponse);
 
+			return;
+		}
+
+		public async Task GetTopRated(Movies movies)
+		{
+			var movieInfoResponse = await _movieApi.GetTopRatedAsync();
+
+			await populateInfoHelper(movies, movieInfoResponse);
+
+			return;
+		}
+
+		private async Task populateInfoHelper(Movies movies, ApiSearchResponse<MovieInfo> res)
+		{
 			movies.ClearList();
 
-			foreach (var m in movieInfoResponse.Results)
+			foreach (var m in res.Results)
 			{
-				ApiQueryResponse<MovieCredit> movieCreditsResponse = await movieApi.GetCreditsAsync(m.Id);
+				ApiQueryResponse<MovieCredit> movieCreditsResponse = await _movieApi.GetCreditsAsync(m.Id);
 
 				var localFilePath = _imageDl.LocalPathForFilename(m.PosterPath);
 				if (localFilePath != string.Empty)
@@ -38,9 +54,7 @@ namespace MovieSearch.iOS
 					var image = _imageDl.DownloadImage(m.PosterPath, localFilePath, CancellationToken.None);
 				}
 				m.PosterPath = localFilePath;
-
 				movies.ExtractInfo(m, movieCreditsResponse);
-
 			}
 			return;
 		}
