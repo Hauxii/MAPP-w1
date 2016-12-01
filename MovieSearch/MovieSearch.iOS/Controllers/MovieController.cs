@@ -87,7 +87,7 @@ namespace MovieSearch.iOS.Controllers
 						NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
 					}
 
-					var ps = CreatePrompt(movieField.Text);
+					var ps = CreatePrompt("\t" + movieField.Text);
 					this.View.AddSubview(ps);
 					this._yCoord += StepY / 2;
 
