@@ -26,10 +26,10 @@ namespace MovieSearch.iOS
 
 			var movies = new Movies();
 
-			var movieController = new MovieController(movies.MovieList);			
+			var movieController = new MovieController(movies);			
 			var movieNavigationController = new UINavigationController(movieController);
 
-			var movieTopRatedController = new MovieTopRatedController(movies.MovieList);
+			var movieTopRatedController = new MovieTopRatedController(movies);
 			var movieTopRatedNavigationController = new UINavigationController(movieTopRatedController);
 
 			var tabBarController = new TabBarController()

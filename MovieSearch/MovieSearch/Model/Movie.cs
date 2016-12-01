@@ -9,8 +9,8 @@ namespace MovieSearch.Model
 {
 	public class Movie
 	{
-		public int ID { get; set; }
 		public Movie() { }
+		public int ID { get; set; }
 		public string Title { get; set; }
 		public string Runtime { get; set; }
 		public string Year { get; set; }

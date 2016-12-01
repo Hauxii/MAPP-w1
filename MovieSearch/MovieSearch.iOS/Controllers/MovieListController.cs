@@ -21,7 +21,7 @@ namespace MovieSearch.iOS.Controllers
         {
             this.Title = "Movie list";
             this.View.BackgroundColor = UIColor.White;
-
+			//this.TableView.ReloadData();
             this.TableView.Source = new MovieListSource(this._movieList, OnSelectedMovie);
         }
 

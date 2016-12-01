@@ -9,6 +9,7 @@ using MovieSearch.Model;
 using System.Collections.Generic;
 using System.Threading;
 using MovieSearch.MovieDownload;
+using System.Threading.Tasks;
 
 namespace MovieSearch.iOS.Controllers
 
@@ -23,11 +24,15 @@ namespace MovieSearch.iOS.Controllers
 
 		private int _yCoord;
 
-		private List<Model.Movie> _movieList;
+		private Movies _movies;
 
-		public MovieController(List<Model.Movie> movieList)
-		{
-			this._movieList = movieList;
+		private MovieImageDownloader _imgDl;
+
+		public MovieController(Movies movies)
+		{ 
+			this._movies = movies;
+
+			this._imgDl = new MovieImageDownloader();
 
 			this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Search, 0);
 		}
@@ -37,9 +42,6 @@ namespace MovieSearch.iOS.Controllers
 			base.ViewDidLoad();
 
 			this.Title = "Search";
-
-			MovieDbFactory.RegisterSettings(new DBSettings());
-			var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
 
 			this.View.BackgroundColor = UIColor.White;
 
@@ -65,77 +67,32 @@ namespace MovieSearch.iOS.Controllers
 					this.PresentViewController(okAlertController, true, null);
 				}
 				else {
-
-
 					searchButton.Enabled = false;
-					ImageDownloader getImage = new ImageDownloader(new StorageClient());
-
-
-					//loading
 					var loading = CreateLoadingSpinner();
 					this.View.AddSubview(loading);
 					loading.StartAnimating();
 
-					movieField.ResignFirstResponder();
-					ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(movieField.Text);
+					MovieImageDownloader imgDl = new MovieImageDownloader();
 
-					this._movieList.Clear();
+					await imgDl.GetMoviesByTitle(this._movies, movieField.Text);
 
-					var movieInfoList = response.Results;
+					//await this._movies.searchByTitle(movieField.Text);
 
-					foreach (var r in movieInfoList)
-					{
-						ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(r.Id);
+					//await _imgDl.populateImages(_movies.MovieList);
 
-						var localFilePath = getImage.LocalPathForFilename(r.PosterPath);
-						var image = getImage.DownloadImage(r.PosterPath, localFilePath, CancellationToken.None);
-						var castList = new List<string>();
-						var genreList = new List<string>();
-
-						//Getting genres
-						foreach (var g in r.Genres)
-						{
-							genreList.Add(g.Name);
-						}
-
-						var castMembers = resp.Item.CastMembers;
-
-						//Getting 3 cast members
-						int k;
-						for (k = 0; k < 3 && k < castMembers.Count; k++)
-						{
-							castList.Add(castMembers[k].Name);
-						}
-
-						Model.Movie movie = new Model.Movie()
-						{
-							ID = r.Id,
-							Title = r.Title,
-							Year = r.ReleaseDate.Year.ToString(),
-							Overview = r.Overview,
-							Poster = localFilePath,
-							Cast = castList,
-							Genre = genreList
-						};
-
-						populateMovieList(movie);
-					}
-
-					NavigationController.PushViewController(new MovieListController(this._movieList), true);
+					NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
 					loading.StopAnimating();
 					searchButton.Enabled = true;
 					loading.StopAnimating();
 				}
+
+
 			};
+
 
 			this.View.AddSubview(prompt);
 			this.View.AddSubview(movieField);
 			this.View.AddSubview(searchButton);
-		}
-
-		private void populateMovieList(Model.Movie movie)
-		{
-			this._movieList.Add(movie);
 		}
 
 		private UIButton CreateButton(string title)
