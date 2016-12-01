@@ -75,8 +75,6 @@ namespace MovieSearch.iOS.Controllers
 					searchButton.Enabled = false;
 					searchButton.Hidden = true;
 
-					this.View.ExchangeSubview(2, 3);
-
 					loading.StartAnimating();
 
 					MovieResourceProvider resourceProvider = new MovieResourceProvider();
