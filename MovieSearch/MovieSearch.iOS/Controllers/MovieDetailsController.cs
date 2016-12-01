@@ -13,7 +13,7 @@ namespace MovieSearch.iOS.Controllers
 
 		private const int StartY = 80;
 
-		private const int StepY = 20;
+		private const int StepY = 30;
 
 		private int _yCoord;
 
@@ -43,10 +43,11 @@ namespace MovieSearch.iOS.Controllers
 
 			this._yCoord += StepY;
 
-			var poster = CreatePoster();
-
 			var runtime = CreateRunningTimeAndGenre();
+
 			this._yCoord += StepY;
+
+			var poster = CreatePoster();
 
 			var overview = CreateOverview();
 
@@ -54,8 +55,6 @@ namespace MovieSearch.iOS.Controllers
 			this.View.AddSubview(overview);
 			this.View.AddSubview(runtime);
 			this.View.AddSubview(poster);
-
-
 		}
 
 		private UILabel CreateTitle()
@@ -92,7 +91,7 @@ namespace MovieSearch.iOS.Controllers
 				
 				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - HorizontalMargin * 2, 70),
 				Font = UIFont.FromName("Arial", 15f),
-				Text = this.movie.Runtime + " min | "
+				Text = this.movie.Runtime + " min | ",
 			};
 			for (int i = 0; i < movie.Genre.Count; i++)
 			{
@@ -109,7 +108,7 @@ namespace MovieSearch.iOS.Controllers
 		{
 			var img = new UIImageView()
 			{
-				Frame = new CGRect(HorizontalMargin, this._yCoord, 50, 100),
+				Frame = new CGRect(HorizontalMargin, this._yCoord, 90, 135),
 				Image = UIImage.FromFile(this.movie.Poster)
 			};
 			return img; //movie.Poster;
