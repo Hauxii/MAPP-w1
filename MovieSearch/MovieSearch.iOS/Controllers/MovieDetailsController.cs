@@ -55,8 +55,6 @@ namespace MovieSearch.iOS.Controllers
 			this.View.AddSubview(overview);
 			this.View.AddSubview(runtime);
 			this.View.AddSubview(poster);
-
-
 		}
 
 		private UILabel CreateTitle()
@@ -90,7 +88,7 @@ namespace MovieSearch.iOS.Controllers
 			{
 				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - HorizontalMargin * 2, 20),
 				Font = UIFont.FromName("Arial", 15f),
-				Text = this.movie.Runtime + " min | "
+				Text = this.movie.Runtime + " min | ",
 			};
 			for (int i = 0; i < movie.Genre.Count; i++)
 			{
