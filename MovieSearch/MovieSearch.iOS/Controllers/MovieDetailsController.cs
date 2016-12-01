@@ -42,7 +42,12 @@ namespace MovieSearch.iOS.Controllers
 
 			var poster = CreatePoster();
 
+			this._yCoord += StepY;
+
+			var overview = CreateOverview();
+
 			this.View.AddSubview(title);
+			this.View.AddSubview(overview);
 
 
 		}
@@ -57,6 +62,17 @@ namespace MovieSearch.iOS.Controllers
 				Text = titleyear
 			};
 			return title;
+		}
+
+		private UILabel CreateOverview()
+		{
+			var overview = new UILabel()
+			{
+				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - HorizontalMargin * 2, 50),
+				Font = UIFont.FromName("Arial", 13f),
+				Text = movie.Overview
+			};
+			return overview;
 		}
 
 		private UILabel CreateRunningTimeAndGenre()
