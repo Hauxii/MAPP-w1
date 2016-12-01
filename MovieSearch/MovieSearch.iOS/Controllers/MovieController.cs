@@ -16,6 +16,7 @@ namespace MovieSearch.iOS.Controllers
 {
 	public class MovieController : UIViewController
 	{
+
 		private const int HorizontalMargin = 20;
 
 		private const int StartY = 80;
@@ -26,15 +27,12 @@ namespace MovieSearch.iOS.Controllers
 
 		private Movies _movies;
 
-		private MovieResourceProvider _imgDl;
-
 		public MovieController(Movies movies)
 		{ 
 			this._movies = movies;
 
-			this._imgDl = new MovieResourceProvider();
-
 			this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Search, 0);
+
 		}
 
 		public override void ViewDidLoad()
@@ -47,7 +45,7 @@ namespace MovieSearch.iOS.Controllers
 
 			this._yCoord = StartY;
 
-			var prompt = CreatePrompt();
+			var prompt = CreatePrompt("Enter words in a movie title: ");
 
 			this._yCoord += StepY;
 
@@ -57,6 +55,13 @@ namespace MovieSearch.iOS.Controllers
 
 			var searchButton = CreateButton("Get movie");
 			this._yCoord += StepY;
+
+			var prevS = CreatePrompt("Previous searches:");
+			this.View.AddSubview(prevS);
+			this._yCoord += StepY;
+
+			var loading = CreateLoadingSpinner();
+			loading.StopAnimating();
 
 			searchButton.TouchUpInside += async (sender, args) =>
 			{
@@ -68,8 +73,10 @@ namespace MovieSearch.iOS.Controllers
 				}
 				else {
 					searchButton.Enabled = false;
-					var loading = CreateLoadingSpinner();
-					this.View.AddSubview(loading);
+					searchButton.Hidden = true;
+
+					this.View.ExchangeSubview(2, 3);
+
 					loading.StartAnimating();
 
 					MovieResourceProvider resourceProvider = new MovieResourceProvider();
@@ -77,18 +84,23 @@ namespace MovieSearch.iOS.Controllers
 					await resourceProvider.GetMoviesByTitle(this._movies, movieField.Text);
 
 					NavigationController.PushViewController(new MovieListController(this._movies.MovieList), true);
+
+					var ps = CreatePrompt(movieField.Text);
+					this.View.AddSubview(ps);
+					this._yCoord += StepY;
+
 					loading.StopAnimating();
 					searchButton.Enabled = true;
+					searchButton.Hidden = false;
 					loading.StopAnimating();
 				}
 
-
 			};
-
 
 			this.View.AddSubview(prompt);
 			this.View.AddSubview(movieField);
 			this.View.AddSubview(searchButton);
+			this.View.AddSubview(loading);
 		}
 
 		private UIButton CreateButton(string title)
@@ -110,12 +122,12 @@ namespace MovieSearch.iOS.Controllers
 			return movieField;
 		}
 
-		private UILabel CreatePrompt()
+		private UILabel CreatePrompt(string text)
 		{
 			var prompt = new UILabel()
 			{
 				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width, 50),
-				Text = "Enter words in a movie title: "
+				Text = text
 			};
 			return prompt;
 		}
@@ -123,7 +135,7 @@ namespace MovieSearch.iOS.Controllers
 		private UIActivityIndicatorView CreateLoadingSpinner()
 		{
 			UIActivityIndicatorView loading = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray);
-			loading.Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50);
+			loading.Frame = new CGRect(HorizontalMargin, 180, this.View.Bounds.Width - 2 * HorizontalMargin, 50);
 			loading.HidesWhenStopped = true;
 			return loading;
 		}
