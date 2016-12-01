@@ -13,7 +13,7 @@ namespace MovieSearch.iOS.Controllers
 
 		private const int StartY = 80;
 
-		private const int StepY = 50;
+		private const int StepY = 20;
 
 		private int _yCoord;
 
@@ -86,8 +86,18 @@ namespace MovieSearch.iOS.Controllers
 		{
 			var subtitle = new UILabel()
 			{
-				Text = this.movie.Runtime
+				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - HorizontalMargin * 2, 20),
+				Font = UIFont.FromName("Arial", 15f),
+				Text = this.movie.Runtime + " min | "
 			};
+			for (int i = 0; i < movie.Genre.Count; i++)
+			{
+				subtitle.Text += movie.Genre[i];
+				if (i+1 != movie.Genre.Count)
+				{
+					subtitle.Text += ", ";
+				}
+			}
 			return subtitle;
 		}
 
