@@ -58,65 +58,74 @@ namespace MovieSearch.iOS.Controllers
 
 			searchButton.TouchUpInside += async (sender, args) =>
 			{
-				searchButton.Enabled = false;
-			    ImageDownloader getImage = new ImageDownloader(new StorageClient());
-                
-
-				//loading
-				var loading = CreateLoadingSpinner();
-				this.View.AddSubview(loading);
-				loading.StartAnimating();
-
-				movieField.ResignFirstResponder();
-				ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(movieField.Text);
-
-				this._movieList.Clear();
-
-				var movieInfoList = response.Results;
-
-				foreach (var r in movieInfoList)
+				if (movieField.Text.Length == 0)
 				{
-					ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(r.Id);
-
-					var localFilePath = getImage.LocalPathForFilename(r.PosterPath);
-					var image = getImage.DownloadImage(r.PosterPath, localFilePath, CancellationToken.None);
-
-					var castList = new List<string>();
-					var genreList = new List<string>();
-
-					//Getting genres
-					foreach (var g in r.Genres)
-					{
-						genreList.Add(g.Name);
-					}
-
-					var castMembers = resp.Item.CastMembers;
-
-					//Getting 3 cast members
-					int k;
-					for (k = 0; k < 3 && k < castMembers.Count; k++)
-					{
-						castList.Add(castMembers[k].Name);
-					}
-
-					Model.Movie movie = new Model.Movie()
-					{
-						ID = r.Id,
-						Title = r.Title,
-						Year = r.ReleaseDate.Year.ToString(),
-						Overview = r.Overview,
-						Poster = localFilePath,
-						Cast = castList,
-						Genre = genreList
-					};
-
-					populateMovieList(movie);
+					var okAlertController = UIAlertController.Create("Invalid input", "Please enter a valid input", UIAlertControllerStyle.Alert);
+					okAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+					this.PresentViewController(okAlertController, true, null);
 				}
+				else {
 
-				NavigationController.PushViewController(new MovieListController(this._movieList), true);
-                loading.StopAnimating();
-				searchButton.Enabled = true;
-				loading.StopAnimating();
+
+					searchButton.Enabled = false;
+					ImageDownloader getImage = new ImageDownloader(new StorageClient());
+
+
+					//loading
+					var loading = CreateLoadingSpinner();
+					this.View.AddSubview(loading);
+					loading.StartAnimating();
+
+					movieField.ResignFirstResponder();
+					ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(movieField.Text);
+
+					this._movieList.Clear();
+
+					var movieInfoList = response.Results;
+
+					foreach (var r in movieInfoList)
+					{
+						ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(r.Id);
+
+						var localFilePath = getImage.LocalPathForFilename(r.PosterPath);
+						var image = getImage.DownloadImage(r.PosterPath, localFilePath, CancellationToken.None);
+						var castList = new List<string>();
+						var genreList = new List<string>();
+
+						//Getting genres
+						foreach (var g in r.Genres)
+						{
+							genreList.Add(g.Name);
+						}
+
+						var castMembers = resp.Item.CastMembers;
+
+						//Getting 3 cast members
+						int k;
+						for (k = 0; k < 3 && k < castMembers.Count; k++)
+						{
+							castList.Add(castMembers[k].Name);
+						}
+
+						Model.Movie movie = new Model.Movie()
+						{
+							ID = r.Id,
+							Title = r.Title,
+							Year = r.ReleaseDate.Year.ToString(),
+							Overview = r.Overview,
+							Poster = localFilePath,
+							Cast = castList,
+							Genre = genreList
+						};
+
+						populateMovieList(movie);
+					}
+
+					NavigationController.PushViewController(new MovieListController(this._movieList), true);
+					loading.StopAnimating();
+					searchButton.Enabled = true;
+					loading.StopAnimating();
+				}
 			};
 
 			this.View.AddSubview(prompt);

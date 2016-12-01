@@ -44,13 +44,14 @@ namespace MovieSearch.iOS.Controllers
 			this._yCoord += StepY;
 
 			var poster = CreatePoster();
-
+			var runtime = CreateRunningTimeAndGenre();
 			this._yCoord += StepY;
 
 			var overview = CreateOverview();
 
 			this.View.AddSubview(title);
 			this.View.AddSubview(overview);
+			this.View.AddSubview(runtime);
 
 
 		}
@@ -80,11 +81,11 @@ namespace MovieSearch.iOS.Controllers
 
 		private UILabel CreateRunningTimeAndGenre()
 		{
-			/*var subtitle = new UILabel())
+			var subtitle = new UILabel()
 			{
-				Text = movie.Runtime
-			};*/
-			return null;
+				Text = this.movie.Runtime
+			};
+			return subtitle;
 		}
 
 		private UIImage CreatePoster()
