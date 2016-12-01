@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DM.MovieApi;
 using DM.MovieApi.MovieDb.Movies;
 using DM.MovieApi.ApiResponse;
+using System.IO;
 
 namespace MovieSearch.iOS
 {
@@ -51,8 +52,12 @@ namespace MovieSearch.iOS
 				var localFilePath = _imageDl.LocalPathForFilename(m.PosterPath);
 				if (localFilePath != string.Empty)
 				{
-					 await _imageDl.DownloadImage(m.PosterPath, localFilePath, CancellationToken.None);
+					if (!File.Exists(localFilePath))
+					{
+						await _imageDl.DownloadImage(m.PosterPath, localFilePath, CancellationToken.None);
+					}
 				}
+
 				m.PosterPath = localFilePath;
 				movies.ExtractInfo(m, movieCreditsResponse);
 			}
