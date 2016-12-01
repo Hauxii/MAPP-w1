@@ -42,8 +42,6 @@ namespace MovieSearch.iOS.Controllers
 
 			var poster = CreatePoster();
 
-			this._yCoord += StepY;
-
 			var overview = CreateOverview();
 
 			this.View.AddSubview(title);
@@ -57,9 +55,9 @@ namespace MovieSearch.iOS.Controllers
 			string titleyear = movie.Title + " (" + movie.Year + ")";
 			var title = new UILabel()
 			{
-				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - HorizontalMargin * 2, 50),
+				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - HorizontalMargin * 2, 20),
 				Font = UIFont.FromName("Marion", 22f),
-				Text = titleyear
+				Text = titleyear,
 			};
 			return title;
 		}
@@ -68,10 +66,12 @@ namespace MovieSearch.iOS.Controllers
 		{
 			var overview = new UILabel()
 			{
-				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - HorizontalMargin * 2, 50),
-				Font = UIFont.FromName("Arial", 13f),
+				Frame = new CGRect(100, this._yCoord, this.View.Bounds.Width - HorizontalMargin * 2, 100),
+				Font = UIFont.FromName("Arial", 12f),
 				Text = movie.Overview
 			};
+
+
 			return overview;
 		}
 
