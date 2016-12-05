@@ -12,8 +12,8 @@ using Android.Widget;
 
 namespace MovieSearch.Droid
 {
-    [Activity(Label = "Activity1")]
-    public class Activity1 : Activity
+    [Activity(Label = "MovieListActivity")]
+    public class MovieListActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

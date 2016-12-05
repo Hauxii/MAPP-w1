@@ -19,6 +19,7 @@
         android:layout_marginTop="20dp" />
     <Button
         android:id="@+id/searchButton"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Search"
@@ -26,6 +27,12 @@
         android:background="@android:color/transparent"
         android:height="40dp"
         android:width="100dp" />
+    <ProgressBar
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar1"
+        android:layout_marginTop="20dp" />
     <TextView
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"

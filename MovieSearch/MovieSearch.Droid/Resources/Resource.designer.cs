@@ -70,7 +70,10 @@ namespace MovieSearch.Droid
 			public const int movieTextView = 2131099648;
 			
 			// aapt resource value: 0x7f060003
-			public const int resultTextView = 2131099651;
+			public const int progressBar1 = 2131099651;
+			
+			// aapt resource value: 0x7f060004
+			public const int resultTextView = 2131099652;
 			
 			// aapt resource value: 0x7f060002
 			public const int searchButton = 2131099650;
