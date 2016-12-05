@@ -23,4 +23,10 @@
         android:layout_height="wrap_content"
         android:text="Search"
         android:layout_marginTop="20dp" />
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/resultTextView"
+        android:layout_marginTop="20dp" />
 </LinearLayout>

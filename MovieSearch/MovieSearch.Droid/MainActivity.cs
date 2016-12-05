@@ -6,7 +6,7 @@ using Android.Views.InputMethods;
 
 namespace MovieSearch.Droid
 {
-	[Activity (Label = "Bla", Icon = "@drawable/icon")]
+	[Activity (Label = "Movie search", Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
 		protected override void OnCreate (Bundle savedInstanceState)
@@ -21,13 +21,15 @@ namespace MovieSearch.Droid
 
 			var movieTextView = this.FindViewById<TextView>(Resource.Id.movieTextView);
 
+			var resultTextView = this.FindViewById<TextView>(Resource.Id.resultTextView);
+
 			var searchButton = this.FindViewById<Button>(Resource.Id.searchButton);
 
 			searchButton.Click += (sender, e) => 
 			{
 				//var manager = (InputMethodManager)this.GetSystemService(InputMethodService);
 				//manager.HideSoftInputFromWindow(movieEditText.WindowToken);
-				movieTextView.Text = movieEditText.Text;
+				movieTextView.Text = resultTextView.Text;
 			};
 		}
 	}
