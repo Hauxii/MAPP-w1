@@ -6,7 +6,7 @@ using Android.Views.InputMethods;
 
 namespace MovieSearch.Droid
 {
-	[Activity (Label = "Bla", MainLauncher = true, Icon = "@drawable/icon")]
+	[Activity (Label = "Bla", Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
 		protected override void OnCreate (Bundle savedInstanceState)
