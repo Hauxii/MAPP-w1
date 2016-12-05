@@ -32,14 +32,16 @@ namespace MovieSearch.Droid
 
 			var searchButton = this.FindViewById<Button>(Resource.Id.searchButton);
 
-			searchButton.Click += async (sender, e) => 
-			{
+            Console.WriteLine("dickbutt");
+
+			searchButton.Click += async  (sender, e) => 
+            {
 				var manager = (InputMethodManager)this.GetSystemService(InputMethodService);
 				manager.HideSoftInputFromWindow(movieEditText.WindowToken, 0);
 
                 var movieInfoResponse = await movieApi.SearchByTitleAsync(movieEditText.Text);
 
-			    resultTextView.Text = "HAHAHA"; //movieInfoResponse.Results[0].Title;
+			    resultTextView.Text = movieInfoResponse.Results[0].Title;
 			};
 		}
 	}
