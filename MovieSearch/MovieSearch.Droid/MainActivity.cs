@@ -3,6 +3,9 @@ using Android.App;
 using Android.Widget;
 using Android.OS;
 using Android.Views.InputMethods;
+using DM.MovieApi;
+using DM.MovieApi.MovieDb.Movies;
+using MovieSearch.MovieDownload;
 
 namespace MovieSearch.Droid
 {
@@ -16,20 +19,27 @@ namespace MovieSearch.Droid
 			// Set our view from the "main" layout resource
 			this.SetContentView (Resource.Layout.Main);
 
-			// Get our UI controls from the loaded layout
-			var movieEditText = this.FindViewById<EditText>(Resource.Id.movieEditText);
+            MovieDbFactory.RegisterSettings(new DBSettings());
+            var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
 
-			var movieTextView = this.FindViewById<TextView>(Resource.Id.movieTextView);
+
+            // Get our UI controls from the loaded layout
+            var movieEditText = this.FindViewById<EditText>(Resource.Id.movieEditText);
+
+			//var movieTextView = this.FindViewById<TextView>(Resource.Id.movieTextView);
 
 			var resultTextView = this.FindViewById<TextView>(Resource.Id.resultTextView);
 
 			var searchButton = this.FindViewById<Button>(Resource.Id.searchButton);
 
-			searchButton.Click += (sender, e) => 
+			searchButton.Click += async (sender, e) => 
 			{
-				//var manager = (InputMethodManager)this.GetSystemService(InputMethodService);
-				//manager.HideSoftInputFromWindow(movieEditText.WindowToken);
-				movieTextView.Text = resultTextView.Text;
+				var manager = (InputMethodManager)this.GetSystemService(InputMethodService);
+				manager.HideSoftInputFromWindow(movieEditText.WindowToken, 0);
+
+                var movieInfoResponse = await movieApi.SearchByTitleAsync(movieEditText.Text);
+
+			    resultTextView.Text = "HAHAHA"; //movieInfoResponse.Results[0].Title;
 			};
 		}
 	}
