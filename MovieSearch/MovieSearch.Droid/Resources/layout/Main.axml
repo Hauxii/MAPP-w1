@@ -1,14 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-<Button  
-    android:id="@+id/myButton"
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    />
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
+    <TextView
+        android:text="Enter movie title: "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/movieTextView"
+        android:layout_marginTop="20dp" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/movieEditText"
+        android:layout_marginTop="20dp" />
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:layout_marginTop="20dp" />
 </LinearLayout>
-

@@ -47,6 +47,9 @@ namespace MovieSearch.Droid
 			// aapt resource value: 0x7f020000
 			public const int Icon = 2130837504;
 			
+			// aapt resource value: 0x7f020001
+			public const int Splash = 2130837505;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -60,8 +63,14 @@ namespace MovieSearch.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int myButton = 2131034112;
+			// aapt resource value: 0x7f060001
+			public const int movieEditText = 2131099649;
+			
+			// aapt resource value: 0x7f060000
+			public const int movieTextView = 2131099648;
+			
+			// aapt resource value: 0x7f060002
+			public const int searchButton = 2131099650;
 			
 			static Id()
 			{
@@ -104,6 +113,25 @@ namespace MovieSearch.Droid
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Style
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int MyTheme = 2131034112;
+			
+			// aapt resource value: 0x7f050001
+			public const int MyTheme_Splash = 2131034113;
+			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Style()
 			{
 			}
 		}
