@@ -35,8 +35,6 @@ namespace MovieSearch.Droid
             // Get our UI controls from the loaded layout
             var movieEditText = this.FindViewById<EditText>(Resource.Id.movieEditText);
 
-			var resultTextView = this.FindViewById<TextView>(Resource.Id.resultTextView);
-
 			var searchButton = this.FindViewById<Button>(Resource.Id.searchButton);
 
 		    var loading = this.FindViewById<ProgressBar>(Resource.Id.progressBar1);
