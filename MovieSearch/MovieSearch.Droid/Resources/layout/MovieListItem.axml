@@ -6,25 +6,19 @@
     android:minWidth="25px"
     android:minHeight="25px"
     android:padding="20px">
-<<<<<<< HEAD
-=======
-    <ImageView
-        android:id="@+id/poster"
-        android:layout_width="133px"
-        android:layout_height="133px"
-        android:layout_alignParentLeft="true" />
->>>>>>> 940918a47bd811448c9a092d51208c390c47953f
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="22dp"
+        android:fontFamily="sans-serif-medium"
+        android:paddingRight="100px"
         android:id="@+id/title" />
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:fontFamily="sans-serif-light-italic"
         android:textSize="16dp"
-<<<<<<< HEAD
+        android:paddingRight="100px"
         android:id="@+id/cast"
         android:layout_below="@id/title"
         android:layout_alignRight="@id/title" />
@@ -33,9 +27,4 @@
         android:layout_width="133px"
         android:layout_height="133px"
         android:layout_alignParentRight="true" />
-=======
-        android:id="@+id/year"
-        android:layout_below="@id/name"
-        android:layout_alignRight="@id/cast" />
->>>>>>> 940918a47bd811448c9a092d51208c390c47953f
 </RelativeLayout>
