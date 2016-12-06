@@ -17,10 +17,12 @@ namespace MovieSearch.Droid
 	public class MainActivity : Activity
 	{
 		private Movies _movies;
+	    private MovieResourceProvider _movieResourceProvider;
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
 			this._movies = new Movies();
+            this._movieResourceProvider = new MovieResourceProvider();
 
 			// Set our view from the "main" layout resource
 			this.SetContentView (Resource.Layout.Main);
@@ -47,15 +49,20 @@ namespace MovieSearch.Droid
 				var manager = (InputMethodManager)this.GetSystemService(InputMethodService);
 				manager.HideSoftInputFromWindow(movieEditText.WindowToken, 0);
 
-                var movieInfoResponse = await movieApi.SearchByTitleAsync(movieEditText.Text);
+                //var movieInfoResponse = await movieApi.SearchByTitleAsync(movieEditText.Text);
+
+			    await this._movieResourceProvider.GetMoviesByTitle(this._movies, movieEditText.Text);
+
+                var intent = new Intent(this, typeof(MovieListActivity));
+                intent.PutStringArrayListExtra("titleList", this._movies.MovieList.Select(m => m.Title).ToArray());
+                this.StartActivity(intent);
+
                 searchButton.Visibility = ViewStates.Visible;
                 loading.Visibility = ViewStates.Gone;
 
-				//resultTextView.Text = movieInfoResponse.Results[0].Title;
+				resultTextView.Text = this._movies.MovieList[0].Title;
 
-				var intent = new Intent(this, typeof(MovieListActivity));
-				intent.PutStringArrayListExtra("titleList", this._movies.MovieList.Select(m => m.Title).ToArray());
-				this.StartActivity(intent);
+				
 			};
 		}
 	}
