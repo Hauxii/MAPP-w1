@@ -19,7 +19,9 @@ namespace MovieSearch.Droid
 	{
 		private Movies _movies;
 	    private MovieResourceProvider _movieResourceProvider;
-		protected override void OnCreate (Bundle savedInstanceState)
+	    private Button _searchButton;
+	    private ProgressBar _loading;
+        protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
 			this._movies = new Movies();
@@ -37,15 +39,15 @@ namespace MovieSearch.Droid
 
 			var resultTextView = this.FindViewById<TextView>(Resource.Id.resultTextView);
 
-			var searchButton = this.FindViewById<Button>(Resource.Id.searchButton);
+			_searchButton = this.FindViewById<Button>(Resource.Id.searchButton);
 
-		    var loading = this.FindViewById<ProgressBar>(Resource.Id.progressBar1);
-            loading.Visibility = ViewStates.Invisible;
+		    _loading = this.FindViewById<ProgressBar>(Resource.Id.progressBar1);
+            _loading.Visibility = ViewStates.Invisible;
 
-			searchButton.Click += async  (sender, e) =>
+			_searchButton.Click += async  (sender, e) =>
 			{
-			    searchButton.Visibility = ViewStates.Gone;
-                loading.Visibility = ViewStates.Visible;
+			    _searchButton.Visibility = ViewStates.Gone;
+                _loading.Visibility = ViewStates.Visible;
 
 				var manager = (InputMethodManager)this.GetSystemService(InputMethodService);
 				manager.HideSoftInputFromWindow(movieEditText.WindowToken, 0);
@@ -56,10 +58,16 @@ namespace MovieSearch.Droid
 				intent.PutExtra("movieList", JsonConvert.SerializeObject(this._movies.MovieList));
                 this.StartActivity(intent);
 
-                searchButton.Visibility = ViewStates.Visible;
-                loading.Visibility = ViewStates.Gone;
 			};
 		}
+
+	    protected override void OnPause()
+	    {
+	        base.OnPause();
+
+            this._searchButton.Visibility = ViewStates.Visible;
+            this._loading.Visibility = ViewStates.Gone;
+        }
 	}
 }
 
