@@ -5,10 +5,12 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Newtonsoft.Json;
 
 namespace MovieSearch.Droid
 {
@@ -21,10 +23,13 @@ namespace MovieSearch.Droid
 			base.OnCreate(savedInstanceState);
 
 			//ask the intent object to extract the list that the previous activity sentt
-			var movieList = this.Intent.Extras.GetStringArrayList("titleList") ?? new string[0];
+			var jsonString = this.Intent.GetStringExtra("movieList");
 
-			//A list activity needs an adapter (data source))
-			this.ListAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, movieList); 
+			//Deserialize the json string into the movieList object
+			var movieList = JsonConvert.DeserializeObject<List<Movie>>(jsonString);
+
+			//Create a new adapter that will accept the movieList and try to display it)
+			this.ListAdapter = new MovieListAdapter(this, movieList);
         }
     }
 }

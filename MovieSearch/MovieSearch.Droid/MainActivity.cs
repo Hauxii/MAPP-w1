@@ -10,6 +10,7 @@ using MovieSearch.MovieDownload;
 using MovieSearch.Model;
 using Android.Content;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace MovieSearch.Droid
 {
@@ -52,7 +53,7 @@ namespace MovieSearch.Droid
 			    await this._movieResourceProvider.GetMoviesByTitle(this._movies, movieEditText.Text);
 
                 var intent = new Intent(this, typeof(MovieListActivity));
-                intent.PutStringArrayListExtra("titleList", this._movies.MovieList.Select(m => m.Title).ToArray());
+				intent.PutExtra("movieList", JsonConvert.SerializeObject(this._movies.MovieList));
                 this.StartActivity(intent);
 
                 searchButton.Visibility = ViewStates.Visible;
