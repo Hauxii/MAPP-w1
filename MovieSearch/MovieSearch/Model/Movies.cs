@@ -36,10 +36,14 @@ namespace MovieSearch.Model
 			List<string> cast = new List<string>();
 			List<string> genre = new List<string>();
 
-			for (int i = 0; i < response.Item.CastMembers.Count && i < 3; i++)
-			{
-				cast.Add(response.Item.CastMembers[i].Name);
-			}
+		    if (response.Item.CastMembers != null)
+		    {
+                for (int i = 0; i < response.Item.CastMembers.Count && i < 3; i++)
+                {
+                    cast.Add(response.Item.CastMembers[i].Name);
+                }
+            }
+			
 
 			foreach (var g in movieInfo.Genres)
 			{

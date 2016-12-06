@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using Android.App;
+using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.Views;
 using Android.Widget;
-using MovieSearch.Model;
+using Java.IO;
+using Movie = MovieSearch.Model.Movie;
 
 namespace MovieSearch.Droid
 {
@@ -13,7 +17,7 @@ namespace MovieSearch.Droid
 
 		private List<Model.Movie> _movieList;
 
-		public MovieListAdapter(Activity context, List<Movie> movieList)
+		public MovieListAdapter(MovieListActivity context, List<Movie> movieList)
 		{
 			this._context = context;
 			this._movieList = movieList;
@@ -58,9 +62,13 @@ namespace MovieSearch.Droid
             }
             view.FindViewById<TextView>(Resource.Id.cast).Text = castLabel;
 
-			var resourceId = this._context.Resources.GetIdentifier(movie.Poster, "drawable", this._context.PackageName);
-			view.FindViewById<ImageView>(Resource.Id.poster).SetBackgroundResource(resourceId);
-			return view;
+		    if (movie.Poster != null)
+		    {
+                var file = new File(movie.Poster);
+		        var bmimg = BitmapFactory.DecodeFile(file.AbsolutePath);
+                view.FindViewById<ImageView>(Resource.Id.poster).SetImageBitmap(bmimg);
+            }
+            return view;
 		}
 	}
 }
