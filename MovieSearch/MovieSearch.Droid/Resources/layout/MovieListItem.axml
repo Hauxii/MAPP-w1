@@ -16,7 +16,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light-italic"
+        android:fontFamily="sans-serif-light"
+        android:textStyle="italic"
         android:textSize="16dp"
         android:paddingRight="100px"
         android:id="@+id/cast"
