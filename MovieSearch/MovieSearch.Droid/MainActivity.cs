@@ -7,15 +7,20 @@ using Android.Views.InputMethods;
 using DM.MovieApi;
 using DM.MovieApi.MovieDb.Movies;
 using MovieSearch.MovieDownload;
+using MovieSearch.Model
+using Android.Content;
+using System.Linq;
 
 namespace MovieSearch.Droid
 {
 	[Activity (Theme = "@style/MyTheme", Label = "Movie search", Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
+		private Movies _movies;
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
+			this._movies = new Movies();
 
 			// Set our view from the "main" layout resource
 			this.SetContentView (Resource.Layout.Main);
@@ -26,8 +31,6 @@ namespace MovieSearch.Droid
 
             // Get our UI controls from the loaded layout
             var movieEditText = this.FindViewById<EditText>(Resource.Id.movieEditText);
-
-			//var movieTextView = this.FindViewById<TextView>(Resource.Id.movieTextView);
 
 			var resultTextView = this.FindViewById<TextView>(Resource.Id.resultTextView);
 
@@ -47,7 +50,12 @@ namespace MovieSearch.Droid
                 var movieInfoResponse = await movieApi.SearchByTitleAsync(movieEditText.Text);
                 searchButton.Visibility = ViewStates.Visible;
                 loading.Visibility = ViewStates.Gone;
-                resultTextView.Text = movieInfoResponse.Results[0].Title;
+
+				//resultTextView.Text = movieInfoResponse.Results[0].Title;
+
+				var intent = new Intent(this, typeof(MovieListActivity));
+				intent.PutStringArrayListExtra("titleList", this._movies.MovieList.Select(m => m.Title).ToArray());
+				this.StartActivity(intent);
 			};
 		}
 	}
