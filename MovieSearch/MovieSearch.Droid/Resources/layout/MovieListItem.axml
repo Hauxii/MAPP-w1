@@ -20,7 +20,7 @@
         android:textStyle="italic"
         android:textSize="16dp"
         android:paddingRight="100px"
-        android:id="@+id/cast"
+        android:id="@+id/cast"   
         android:layout_below="@id/title"
         android:layout_alignRight="@id/title" />
     <ImageView
