@@ -47,8 +47,8 @@ namespace MovieSearch.Droid
 			}
 			var movie = this._movieList[position];
 		    view.FindViewById<TextView>(Resource.Id.title).Text = movie.Title;
-		    string castLabel = "";
-            for (int i = 0; i < movie.Cast.Count; i++)
+		    var castLabel = "";
+            for (var i = 0; i < movie.Cast.Count; i++)
             {
                 castLabel += movie.Cast[i];
                 if (i + 1 != movie.Cast.Count)
