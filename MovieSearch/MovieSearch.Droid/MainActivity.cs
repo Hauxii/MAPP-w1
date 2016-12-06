@@ -7,7 +7,7 @@ using Android.Views.InputMethods;
 using DM.MovieApi;
 using DM.MovieApi.MovieDb.Movies;
 using MovieSearch.MovieDownload;
-using MovieSearch.Model
+using MovieSearch.Model;
 using Android.Content;
 using System.Linq;
 
@@ -49,8 +49,6 @@ namespace MovieSearch.Droid
 				var manager = (InputMethodManager)this.GetSystemService(InputMethodService);
 				manager.HideSoftInputFromWindow(movieEditText.WindowToken, 0);
 
-                //var movieInfoResponse = await movieApi.SearchByTitleAsync(movieEditText.Text);
-
 			    await this._movieResourceProvider.GetMoviesByTitle(this._movies, movieEditText.Text);
 
                 var intent = new Intent(this, typeof(MovieListActivity));
@@ -59,10 +57,6 @@ namespace MovieSearch.Droid
 
                 searchButton.Visibility = ViewStates.Visible;
                 loading.Visibility = ViewStates.Gone;
-
-				resultTextView.Text = this._movies.MovieList[0].Title;
-
-				
 			};
 		}
 	}
