@@ -46,7 +46,8 @@ namespace MovieSearch.Droid
 				view = this._context.LayoutInflater.Inflate(Resource.Layout.MovieListItem, null);
 			}
 			var movie = this._movieList[position];
-		    view.FindViewById<TextView>(Resource.Id.text).Text = movie.Title;
+		    view.FindViewById<TextView>(Resource.Id.title).Text = movie.Title;
+		    view.FindViewById<TextView>(Resource.Id.cast).Text = movie.Cast.ToString();
 
 			var resourceId = this._context.Resources.GetIdentifier(movie.Poster, "drawable", this._context.PackageName);
 			view.FindViewById<ImageView>(Resource.Id.poster).SetBackgroundResource(resourceId);
