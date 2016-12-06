@@ -47,7 +47,16 @@ namespace MovieSearch.Droid
 			}
 			var movie = this._movieList[position];
 		    view.FindViewById<TextView>(Resource.Id.title).Text = movie.Title;
-		    view.FindViewById<TextView>(Resource.Id.cast).Text = movie.Cast.ToString();
+		    string castLabel = "";
+            for (int i = 0; i < movie.Cast.Count; i++)
+            {
+                castLabel += movie.Cast[i];
+                if (i + 1 != movie.Cast.Count)
+                {
+                    castLabel += ", ";
+                }
+            }
+            view.FindViewById<TextView>(Resource.Id.cast).Text = castLabel;
 
 			var resourceId = this._context.Resources.GetIdentifier(movie.Poster, "drawable", this._context.PackageName);
 			view.FindViewById<ImageView>(Resource.Id.poster).SetBackgroundResource(resourceId);
