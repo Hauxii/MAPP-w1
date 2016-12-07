@@ -60,13 +60,10 @@ namespace MovieSearch.Droid
                 }
             }
             view.FindViewById<TextView>(Resource.Id.cast).Text = castLabel;
+            var file = new File(movie.Poster);
+		    var bmimg = BitmapFactory.DecodeFile(file.AbsolutePath);
+            view.FindViewById<ImageView>(Resource.Id.poster).SetImageBitmap(bmimg);
 
-		    if (movie.Poster != null)
-		    {
-                var file = new File(movie.Poster);
-		        var bmimg = BitmapFactory.DecodeFile(file.AbsolutePath);
-                view.FindViewById<ImageView>(Resource.Id.poster).SetImageBitmap(bmimg);
-            }
             return view;
 		}
 	}
