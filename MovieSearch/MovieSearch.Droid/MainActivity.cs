@@ -57,6 +57,10 @@ namespace MovieSearch.Droid
                 this.StartActivity(intent);
 
 			};
+
+            var toolbar = this.FindViewById<Toolbar>(Resource.Id.toolbar);
+            this.SetActionBar(toolbar);
+            this.ActionBar.Title = "My Toolbar";
 		}
 
 	    protected override void OnPause()
